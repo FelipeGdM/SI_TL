@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request, 'lanchonete/index.html')
+
+def dashboard(request):
+    return HttpResponse('Dashboard')
