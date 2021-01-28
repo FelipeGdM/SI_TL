@@ -11,3 +11,6 @@ def dashboard(request):
 
 def estoque(request):
     return render(request, 'lanchonete/estoque.html')
+
+def inventario(request):
+    return render(request, 'lanchonete/inventario.html')
