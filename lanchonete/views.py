@@ -8,3 +8,12 @@ def index(request):
 
 def dashboard(request):
     return HttpResponse('Dashboard')
+
+def signin(request):
+    return render(request, 'lanchonete/signin.html') 
+
+def homeuser(request):
+    return render(request, 'lanchonete/homeuser.html')
+
+def pagamento(request):
+    return render(request, 'lanchonete/pagamento.html')
