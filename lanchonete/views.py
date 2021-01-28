@@ -8,3 +8,6 @@ def index(request):
 
 def dashboard(request):
     return HttpResponse('Dashboard')
+
+def estoque(request):
+    return render(request, 'lanchonete/estoque.html')
