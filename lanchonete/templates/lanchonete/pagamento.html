@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
     <!-- Bootstrap core CSS -->
+    <script src="./src/bootstrap-input-spinner.js"></script>
+    <script>
+        $("input[type='number']").inputSpinner()
+    </script>
     {% include 'lanchonete/head.html' %}
 
     <style>
@@ -74,14 +78,24 @@
           </div>
         </div>
       </div>
+      <h4> Carrinho: </h4>
+      <h4> Saldo Atual + Carrinho: </h4>
 <div class="btn-group" role="group">
     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown
+      Forma de Pagamento
     </button>
     <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+      <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+      <li><a class="dropdown-item" href="#">Cartão</a></li>
+      <li><a class="dropdown-item" href="#">Pic Pay</a></li>
     </ul>
+    <input type="number" value="0" min="0" max="1000" step="1"/>
   </div>  
+  <br>
+  <br>
+  <h4> Saldo após Pagamento: </h4>
+  <button type="button" class="btn btn-danger">Agora não</button>
+  <button type="button" class="btn btn-success">Pagar agora</button>
+
   </body>
 </html>
