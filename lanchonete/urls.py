@@ -10,4 +10,5 @@ urlpatterns = [
     path('pagamento', views.pagamento, name='pagamento' ),
     path('carrinho', views.carrinho, name='carrinho' ),
     path('rainhahome', views.rainhahome, name='rainhahome' ),
+    path('rainhahomediscretiza', views.rainhahomediscretiza, name='rainhahomediscretiza' ),
 ]

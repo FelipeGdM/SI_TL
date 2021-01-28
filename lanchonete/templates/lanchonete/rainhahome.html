@@ -1,20 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <!-- <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Juliano,Renato,Thalles,Yae">
-    <meta name="generator" content="">
-    <title>TL | Dashboard</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-
-    
-
-    <!-- Bootstrap core CSS -->
-<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     {% include 'lanchonete/head.html' %}
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -31,24 +18,22 @@
       }
     </style>
 
-    
-    <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
   </head>
   <body>
     
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">ThunderLanchonete</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Logout</a>
-    </li>
-  </ul>
-</header>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">ThunderLanchonete</a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h2 style="color:whitesmoke">Olá, Rainha!</h2>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Logout</a>
+        </li>
+      </ul>
+    </header>
 
 <div class="container-fluid">
   <div class="row">
@@ -62,20 +47,20 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Saldo consumidores
+            <a class="nav-link" aria-current="page" href="#">
+              <span data-feather="home"></span>
+              Saldo dos Consumidores
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
+            <a class="nav-link" aria-current="page" href="#">
+              <span data-feather="home"></span>
               Estoque
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
+            <a class="nav-link" aria-current="page" href="#">
+              <span data-feather="home"></span>
               Inventário
             </a>
           </li>
@@ -83,22 +68,17 @@
       </div>
     </nav>
 
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">DASHBOARD</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalhar</button>
-            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+            <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
           </div>
-          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button> -->
         </div>
       </div>
 
-      <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
       <div class="container">
         <div class="row">
           <div class="col">
@@ -144,7 +124,7 @@
         </div>
         <div class="row">
           <div class="col">
-            NO PAGSEGURO:
+            NO CARTÃO:
           </div>
           <div class="col-md-auto">
              - - - - -
@@ -186,7 +166,7 @@
         </div>
       </div>
 
-      <h2>DEMANDA</h2>
+      <h1 class="h2">DEMANDA</h1>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
