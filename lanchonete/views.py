@@ -17,3 +17,5 @@ def homeuser(request):
 
 def pagamento(request):
     return render(request, 'lanchonete/pagamento.html')
+def carrinho(request):
+    return render(request, 'lanchonete/carrinho.html')

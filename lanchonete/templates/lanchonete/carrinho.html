@@ -43,13 +43,13 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link " aria-current="page" href="#">
               <span data-feather="home"></span>
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link active" href="#">
               <span data-feather="users"></span>
               Carrinho
             </a>
@@ -66,7 +66,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
+        <h1 class="h2">Carrinho</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Detalhar</button>
@@ -78,40 +78,56 @@
           </button> -->
         </div>
       </div>
-      <h4> Olá, Fulano!</h4>
-      <h4> Seu Saldo é de X TB: </h4>
-      <h2>Produtos</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Evento</th>
-              <th>Item</th>
-              <th>TB</th>
-              <th>Quantidade</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-              <td>libero</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-              <td>libero</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h4> Subtotal: X</h4>
+      <h4> Salgadinhos</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>    
+      <br>
+      <h4> Bebidas</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>  
+      <br>
+      <h4> Doces</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>  
+    
+      <br>
+      <br>
+      <button type="button" class="btn btn-danger">Agora não</button>
+      <button type="button" class="btn btn-success">Pagar agora</button>
+  
   </body>
 </html>
