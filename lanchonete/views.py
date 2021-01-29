@@ -17,6 +17,7 @@ def homeuser(request):
 
 def pagamento(request):
     return render(request, 'lanchonete/pagamento.html')
+    
 def carrinho(request):
     return render(request, 'lanchonete/carrinho.html')
 
@@ -25,3 +26,8 @@ def estoque(request):
 
 def inventario(request):
     return render(request, 'lanchonete/inventario.html')
+
+def RainhaSaldoConsDetalhe(request):
+def RainhaSaldoCons(request):
+def rainhahomediscretiza(request):
+def rainhahome(request):
