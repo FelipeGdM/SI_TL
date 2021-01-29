@@ -70,50 +70,57 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">SELECIONE OS USUÁRIOS</h1>
-
+        <h1 class="h2">CERNALDO</h1>
       </div>
 
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label>(n) selecionado(s)</label>
-              </th>
-              <th>USUÁRIO</th>
-              <th>SALDO</th>
-              <th>ÚLTIMO PAGAMENTO</th>
+              <th>DATA</th>
+              <th>EVENTO</th>
+              <th>ITEM</th>
+              <th>TB</th>
+              <th>QTD</th>
+              <th>SLD</th>
+              <th>delta</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Arnaldo</td>
-              <td>0</td>
-              <td>20-08-02 19:30</td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Bernaldo</td>
-              <td>+11</td>
-              <td>20-10-26 00:15</td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Cernaldo</td>
-              <td>-16</td>
-              <td>20-10-24 09:35</td>
+              <td colspan="7">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th rowspan="2">20-10-22 10:36</th>
+                      <th colspan="4" rowspan="2">Compra</th>
+                      <th>-10</th>
+                      <th>4</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2"></td>
+                      <td>Kitkat</td>
+                      <td>4</td>
+                      <td>1</td>
+                      <td colspan="2"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
+      <input class="form-control" type="text" placeholder="Descrição eventualidade" aria-label="default input example">
+      <input class="form-control" type="text" placeholder="qtde de TB" aria-label="default input example">
+      <button type="button" class="btn btn-sm btn-outline-secondary">OK</button>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
           <button type="button" class="btn btn-sm btn-outline-secondary">AVISAR</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">VOLTAR</button>
         </div>
       </div>
 
