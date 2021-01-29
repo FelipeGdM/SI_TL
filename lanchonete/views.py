@@ -5,40 +5,28 @@ from .utils import setPageActive
 from .utils import setPageActiveuser
 sidebar_pages = [
     {
-        'name': 'Inventário',
-        'icon': 'house',
-        'active': False,
-        'link': 'inventario'
-    },
-    {
-        'name': 'Carrinho',
-        'icon': 'house',
-        'active': False,
-        'link': 'carrinho'
-    },
-    {
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
         'link': 'rainhahome'
     },
     {
-        'name': 'Dashboard',
-        'icon': 'home',
-        'active': False,
-        'link': 'rainhahomediscretiza'
-    },
-    {
         'name': 'Saldo consumidores',
         'icon': 'users',
         'active': False,
         'link': 'RainhaSaldoCons'
+    },   
+    {
+        'name': 'Estoque',
+        'icon': 'house',
+        'active': False,
+        'link': 'estoque'
     },
     {
-        'name':'Saldo consumidores',
-        'icon': 'users',
+        'name': 'Inventário',
+        'icon': 'house',
         'active': False,
-        'link': 'RainhaSaldoConsDetalhe'
+        'link': 'inventario'
     }
 ]
 
@@ -83,34 +71,49 @@ def signin(request):
 def homeuser(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'homeuser')
-    return render(request, 'lanchonete/homeuser.html',context_user)
+    return render(request, 'lanchonete/homeuser.html',context)
 
 def pagamento(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'pagamento')
-    return render(request, 'lanchonete/pagamento.html',context_user)
+    return render(request, 'lanchonete/pagamento.html',context)
     
 def carrinho(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'carrinho')
-    return render(request, 'lanchonete/carrinho.html',context_user)
+    return render(request, 'lanchonete/carrinho.html',context)
 
 def estoque(request):
-    return render(request, 'lanchonete/estoque.html')
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'estoque')
+    return render(request, 'lanchonete/estoque.html',context)
 
 def inventario(request):
-    return render(request, 'lanchonete/inventario.html')
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'inventario')
+    return render(request, 'lanchonete/inventario.html',context)
+
+def historico(request):
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'historico')
+    return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
     context = {**global_context,  'nome_de_usuario': 'Thalles'}
-    context = setPageActive(context, 'Rainha Home')
-    return render(request, 'lanchonete/rainhahome.html', global_context)
+    context = setPageActive(context, 'rainhahome')
+    return render(request, 'lanchonete/rainhahome.html',context)
 
 def rainhahomediscretiza(request):
-    return render(request, 'lanchonete/RainhaHomeDiscretiza.html')
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'RainhaHomeDiscretiza')
+    return render(request, 'lanchonete/RainhaHomeDiscretiza.html',context)
 
 def RainhaSaldoCons(request):
-    return render(request, 'lanchonete/RainhaSaldoCons.html')
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'RainhaSaldoCons')
+    return render(request, 'lanchonete/RainhaSaldoCons.html',context)
 
 def RainhaSaldoConsDetalhe(request):
-    return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html')
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context = setPageActive(context,'RainhaSaldoConsDetalhe')
+    return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
