@@ -22,7 +22,13 @@ def carrinho(request):
     return render(request, 'lanchonete/carrinho.html')
 
 def rainhahome(request):
-    return render(request, 'lanchonete/rainhahome.html')
+    return render(request, 'lanchonete/RainhaHome.html')
 
 def rainhahomediscretiza(request):
-    return render(request, 'lanchonete/rainhahomediscretiza.html')
+    return render(request, 'lanchonete/RainhaHomeDiscretiza.html')
+
+def RainhaSaldoCons(request):
+    return render(request, 'lanchonete/RainhaSaldoCons.html')
+
+def RainhaSaldoConsDetalhe(request):
+    return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html')
