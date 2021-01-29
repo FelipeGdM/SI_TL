@@ -14,5 +14,5 @@ urlpatterns = [
     path('RainhaSaldoConsDetalhe', views.RainhaSaldoConsDetalhe, name='RainhaSaldoConsDetalhe'),
     path('RainhaSaldoCons', views.RainhaSaldoCons, name='RainhaSaldoCons'),
     path('rainhahomediscretiza', views.rainhahomediscretiza, name='rainhahomediscretiza' ),
-    path('rainhahome', views.rainhahome, name='rainhahome' ),
+    path('rainhahome', views.rainhahome, name='rainhahome' )
 ]

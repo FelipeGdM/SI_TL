@@ -27,7 +27,14 @@ def estoque(request):
 def inventario(request):
     return render(request, 'lanchonete/inventario.html')
 
-def RainhaSaldoConsDetalhe(request):
-def RainhaSaldoCons(request):
-def rainhahomediscretiza(request):
 def rainhahome(request):
+    return render(request, 'lanchonete/RainhaHome.html')
+
+def rainhahomediscretiza(request):
+    return render(request, 'lanchonete/RainhaHomeDiscretiza.html')
+
+def RainhaSaldoCons(request):
+    return render(request, 'lanchonete/RainhaSaldoCons.html')
+
+def RainhaSaldoConsDetalhe(request):
+    return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html')
