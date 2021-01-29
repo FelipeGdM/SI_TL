@@ -15,6 +15,30 @@ sidebar_pages = [
         'icon': 'house',
         'active': False,
         'link': 'carrinho'
+    },
+    {
+        'name': 'Dashboard',
+        'icon': 'home',
+        'active': False,
+        'link': 'rainhahome'
+    },
+    {
+        'name': 'Dashboard',
+        'icon': 'home',
+        'active': False,
+        'link': 'rainhahomediscretiza'
+    },
+    {
+        'name': 'Saldo consumidores',
+        'icon': 'users',
+        'active': False,
+        'link': 'RainhaSaldoCons'
+    },
+    {
+        'name':'Saldo consumidores',
+        'icon': 'users',
+        'active': False,
+        'link': 'RainhaSaldoConsDetalhe'
     }
 ]
 
