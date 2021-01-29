@@ -1,6 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .utils import setPageActive
+
+sidebar_pages = [
+    {
+        'name': 'Inventário',
+        'icon': 'house',
+        'active': False,
+        'link': 'inventario'
+    },
+    {
+        'name': 'Carrinho',
+        'icon': 'house',
+        'active': False,
+        'link': 'carrinho'
+    }
+]
+
+global_context = {
+    'sidebar_pages': sidebar_pages
+}
 # Create your views here.
 
 def index(request):
@@ -28,7 +48,9 @@ def inventario(request):
     return render(request, 'lanchonete/inventario.html')
 
 def rainhahome(request):
-    return render(request, 'lanchonete/RainhaHome.html')
+    context = {**global_context,  'nome_de_usuario': 'Thalles'}
+    context = setPageActive(context, 'Rainha Home')
+    return render(request, 'lanchonete/rainhahome.html', global_context)
 
 def rainhahomediscretiza(request):
     return render(request, 'lanchonete/RainhaHomeDiscretiza.html')
