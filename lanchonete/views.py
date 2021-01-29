@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .utils import setPageActive
-
+from .utils import setPageActiveuser
 sidebar_pages = [
     {
         'name': 'Inventário',
@@ -18,8 +18,32 @@ sidebar_pages = [
     }
 ]
 
+sidebar_pages_user = [
+    {
+        'name': 'Dashboard',
+        'icon': 'house',
+        'active': False,
+        'link': 'homeuser'
+    },
+    {
+        'name': 'Carrinho',
+        'icon': 'house',
+        'active': False,
+        'link': 'carrinho'
+    },
+    {
+        'name': 'Pagamento',
+        'icon': 'house',
+        'active': False,
+        'link': 'pagamento'
+    }
+]
+
 global_context = {
     'sidebar_pages': sidebar_pages
+}
+context_user = {
+    'sidebar_pages_user':sidebar_pages_user
 }
 # Create your views here.
 
@@ -33,13 +57,19 @@ def signin(request):
     return render(request, 'lanchonete/signin.html') 
 
 def homeuser(request):
-    return render(request, 'lanchonete/homeuser.html')
+    context = {**context_user, 'nome_do_usuario':'Thalles'}
+    context = setPageActiveuser(context,'homeuser')
+    return render(request, 'lanchonete/homeuser.html',context_user)
 
 def pagamento(request):
-    return render(request, 'lanchonete/pagamento.html')
+    context = {**context_user, 'nome_do_usuario':'Thalles'}
+    context = setPageActiveuser(context,'pagamento')
+    return render(request, 'lanchonete/pagamento.html',context_user)
     
 def carrinho(request):
-    return render(request, 'lanchonete/carrinho.html')
+    context = {**context_user, 'nome_do_usuario':'Thalles'}
+    context = setPageActiveuser(context,'carrinho')
+    return render(request, 'lanchonete/carrinho.html',context_user)
 
 def estoque(request):
     return render(request, 'lanchonete/estoque.html')
