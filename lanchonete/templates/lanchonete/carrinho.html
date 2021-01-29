@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+    {% include 'lanchonete/head.html' %}
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">ThunderLanchonete</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h2 style="color:whitesmoke">Logado como Fulano</h2>
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+      </header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="#">
+              <span data-feather="home"></span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="users"></span>
+              Carrinho
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
+              Pagar
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Carrinho</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Detalhar</button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Export</button> -->
+          </div>
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button> -->
+        </div>
+      </div>
+      <h4> Subtotal: X</h4>
+      <h4> Salgadinhos</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>    
+      <br>
+      <h4> Bebidas</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>  
+      <br>
+      <h4> Doces</h4>
+      <br>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Escolha
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><a class="dropdown-item" href="#">Dinheiro</a></li>
+          <li><a class="dropdown-item" href="#">Cartão</a></li>
+          <li><a class="dropdown-item" href="#">Pic Pay</a></li>
+        </ul>
+        <input type="number" value="0" min="0" max="1000" step="1"/>
+        <br>
+      </div>  
+    
+      <br>
+      <br>
+      <button type="button" class="btn btn-danger">Agora não</button>
+      <button type="button" class="btn btn-success">Pagar agora</button>
+  
+  </body>
+</html>

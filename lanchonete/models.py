@@ -12,7 +12,6 @@ class Produto(models.Model):
     valor = models.IntegerField()
     estoque = models.IntegerField()
     nome = models.CharField(max_length=64)
-
     def __str__(self):
         return self.nome
 
