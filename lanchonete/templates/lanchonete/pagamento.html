@@ -1,23 +1,10 @@
 <!doctype html>
 <html lang="en">
-    {% include 'lanchonete/head.html' %}
+  {% include 'lanchonete/head.html' %} {% load static %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
+  <link rel="stylesheet" type="text/css" href="{% static 'lanchonete/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'lanchonete/carrinho.css' %}">
+  
   <body>
     
   {% include 'lanchonete/header.html' %}
@@ -43,14 +30,12 @@
           <option value="">Nada</option>
           <option value="">Espécie</option>
           <option value="">Cartão</option>
-          <option value="">Pic Pay</option>
         </select>
       </div>
   <br>
   <br>
   <h4> Saldo após Pagamento: </h4>
-  <button type="submit" class="btn btn-danger">Agora não</button>
-  <button type="submit" class="btn btn-success">Pagar agora</button>
+  <button id='pagar_agora' type="submit" class="btn btn-success">Pagar agora</button>
   </form>
   </body>
 </html>

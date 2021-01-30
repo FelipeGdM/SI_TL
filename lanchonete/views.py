@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from .utils import setPageActive
 from .utils import setPageActiveuser
-from .models import Produto, Compra, UserTL
+from .models import Produto, Compra, UserTL,Pagamento
 
 sidebar_pages = [
     {
@@ -72,9 +72,41 @@ def signin(request):
     return render(request, 'lanchonete/signin.html') 
 
 def homeuser(request):
+    
+    transacoes = {
+        'compra': Compra.objects.filter(user=UserTL(id=1)),
+        'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
+    }
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'homeuser')
-    return render(request, 'lanchonete/homeuser.html',context)
+    context['transacoes'] = transacoes
+
+    if request.method=='GET':
+        return render(request, 'lanchonete/homeuser.html',context)
+
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        print(form_data)
+        if form_data.get('tipo_de_transacao') == 'tudo':
+            transacoes = {
+                Compra.objects.filter(user=UserTL(id=1)) , Pagamento.objects.filter(user=UserTL(id=1))
+            }
+            context['transacoes'] = transacoes
+
+        if form_data.get('tipo_de_transacao') == 'compras':
+            transacoes = {
+                Compra.objects.filter(user=UserTL(id=1)),
+            }
+            context['transacoes'] = transacoes
+        if form_data.get('tipo_de_transacao') == 'pagamentos':
+            transacoes = {
+                Pagamento.objects.filter(user=UserTL(id=1)),
+            }
+            context['transacoes'] = transacoes
+        
+        return render(request, 'lanchonete/homeuser.html',context)
+
+        #maracutaias legais
 
 def pagamento(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
@@ -96,7 +128,6 @@ def carrinho(request):
 
     elif request.method=='POST':
         form_data = request.POST.dict()
-        
         # Maracutaias do banco
         produtos = []
         if form_data['salgado_tipo'] != '' and form_data['salgado_qtde'] != '0':
