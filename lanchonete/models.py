@@ -12,6 +12,7 @@ class Produto(models.Model):
     valor = models.IntegerField()
     estoque = models.IntegerField()
     nome = models.CharField(max_length=64)
+    tipo = models.CharField(max_length=64)
     def __str__(self):
         return self.nome
 
@@ -37,6 +38,9 @@ class Compra(models.Model):
     data = models.DateTimeField(auto_now_add=True)
     produtos = models.JSONField()
     valor = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.valor} TB - {self.data}"
 
 class Pagamento(models.Model):
     id = models.AutoField(primary_key=True)
