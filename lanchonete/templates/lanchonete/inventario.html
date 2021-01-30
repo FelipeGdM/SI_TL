@@ -31,17 +31,18 @@
         <h1 class="h2">Inventário</h1>
       </div>
       <label class="form-label col-3"><h4>Novo Item:</h4></label>
-      <form class="d-flex">
+      <form class="d-flex" method="POST">
+        {% csrf_token %}
         <select name="Categoria" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown" aria-expanded="false">
           Tipo
           <option value="salgado">Salgado</option>
           <option value="bebida">Bebida</option>
           <option value="doce">Doce</option>
         </select>
-        <input type="Nome" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Item">
+        <input type="Nome_do_Item" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Item">
         <label class="form-label col-1"><h6>Preço (TBs):</h6></label>
-        <input type="number" value="0" min="0" max="1000" step="1"/>
-        <button type="button" class="btn btn-success col-2">Adicionar Item</button>
+        <input name="Preço" type="number" value="0" min="0" max="1000" step="1"/>
+        <button type="submit" class="btn btn-success col-2">Adicionar Item</button>
       </form>
       <h1 class="h2 mt-3">Itens</h1>
       <form class="d-flex">
