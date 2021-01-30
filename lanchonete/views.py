@@ -3,6 +3,8 @@ from django.http import HttpResponse
 
 from .utils import setPageActive
 from .utils import setPageActiveuser
+from .models import Produto, Compra, UserTL
+
 sidebar_pages = [
     {
         'name': 'Dashboard',
@@ -54,6 +56,7 @@ sidebar_pages_user = [
 global_context = {
     'sidebar_pages': sidebar_pages
 }
+
 context_user = {
     'sidebar_pages_user':sidebar_pages_user
 }
@@ -79,9 +82,52 @@ def pagamento(request):
     return render(request, 'lanchonete/pagamento.html',context)
     
 def carrinho(request):
-    context = {**context_user, 'nome_do_usuario':'Thalles'}
+    produto = {
+        'salgado': Produto.objects.filter(tipo='salgado'),
+        'doce': Produto.objects.filter(tipo='doce'),
+        'bebida': Produto.objects.filter(tipo='bebida'),
+    }
+    context = {**context_user, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActiveuser(context,'carrinho')
-    return render(request, 'lanchonete/carrinho.html',context)
+    context['compra_finalizada'] = False
+    context['compra_erro'] = False
+    if request.method=='GET':
+        return render(request, 'lanchonete/carrinho.html',context)
+
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        
+        # Maracutaias do banco
+        produtos = []
+        if form_data['salgado_tipo'] != '' and form_data['salgado_qtde'] != '0':
+            produtos.append({
+                'nome': form_data['salgado_tipo'],
+                'quantidade': form_data['salgado_qtde'],
+            })
+        if form_data['doce_tipo'] != '' and form_data['doce_qtde'] != '0':
+            produtos.append({
+                'nome': form_data['doce_tipo'],
+                'quantidade': form_data['doce_qtde'],
+            })
+        if form_data['bebida_tipo'] != '' and form_data['bebida_qtde'] != '0':
+            produtos.append({
+                'nome': form_data['bebida_tipo'],
+                'quantidade': form_data['bebida_qtde'],
+            })
+        
+        if len(produtos) > 0:
+            Compra.objects.create(user=UserTL(id=1), produtos=produtos, valor=10)
+
+            context['compra_finalizada'] = True
+            return render(request, 'lanchonete/carrinho.html', context)
+        else:
+
+            context['compra_finalizada'] = False
+            context['compra_erro'] = True
+            return render(request, 'lanchonete/carrinho.html', context)
+
+    else:
+        return HttpResponse('Requisição inválida!')
 
 def estoque(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
