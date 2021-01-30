@@ -1,82 +1,65 @@
 <!doctype html>
 <html lang="en">
-    {% include 'lanchonete/head.html' %}
+{% include 'lanchonete/head.html' %} {% load static %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/carrinho.css' %}">
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
+<body>
 
-{% include 'lanchonete/header.html' %}
+  {% include 'lanchonete/header.html' %}
+  
+  <div class="container-fluid">
+  
+    {% include 'lanchonete/sidebar.html' %}
 
-<div class="container-fluid">
-    
-  {% include 'lanchonete/sidebar.html' %}
-    
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">SELECIONE OS USUÁRIOS</h1>
-      </div>
-
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label>(n) selecionado(s)</label>
-              </th>
-              <th>USUÁRIO</th>
-              <th>SALDO</th>
-              <th>ÚLTIMO PAGAMENTO</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Arnaldo</td>
-              <td>0</td>
-              <td>20-08-02 19:30</td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Bernaldo</td>
-              <td>+11</td>
-              <td>20-10-26 00:15</td>
-            </tr>
-            <tr>
-              <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-              <td>Cernaldo</td>
-              <td>-16</td>
-              <td>20-10-24 09:35</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
-          <button type="button" class="btn btn-sm btn-outline-secondary">AVISAR</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">SELECIONE OS USUÁRIOS</h1>
         </div>
-      </div>
-
-    </main>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label>(n) selecionado(s)</label>
+                </th>
+                <th>USUÁRIO</th>
+                <th>SALDO</th>
+                <th>ÚLTIMO PAGAMENTO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                <td>Arnaldo</td>
+                <td>0</td>
+                <td>20-08-02 19:30</td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                <td>Bernaldo</td>
+                <td>+11</td>
+                <td>20-10-26 00:15</td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
+                <td>Cernaldo</td>
+                <td>-16</td>
+                <td>20-10-24 09:35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">AVISAR</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
-</div>
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-  </body>
+</body>
 </html>
