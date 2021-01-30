@@ -27,21 +27,27 @@
   {% include 'lanchonete/sidebar.html' %}
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+      {% if item_adicionado %}
+      <div class="alert alert-success mt-4 col-4" role="alert">
+        <h5>Item adicionado com sucesso!</h5>
+      </div>
+      {% endif %}
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Inventário</h1>
       </div>
       <label class="form-label col-3"><h4>Novo Item:</h4></label>
       <form class="d-flex" method="POST">
         {% csrf_token %}
-        <select name="Categoria" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown" aria-expanded="false">
+        <select name="categoria" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown" aria-expanded="false">
           Tipo
           <option value="salgado">Salgado</option>
           <option value="bebida">Bebida</option>
           <option value="doce">Doce</option>
         </select>
-        <input type="Nome_do_Item" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Item">
+        <input type="name" name="nome_do_item" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Item">
         <label class="form-label col-1"><h6>Preço (TBs):</h6></label>
-        <input name="Preço" type="number" value="0" min="0" max="1000" step="1"/>
+        <input name="preco" type="number" value="0" min="0" max="1000" step="1"/>
         <button type="submit" class="btn btn-success col-2">Adicionar Item</button>
       </form>
       <h1 class="h2 mt-3">Itens</h1>

@@ -181,6 +181,7 @@ def inventario(request):
     }
     context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'inventario')
+    context['item_adicionado'] = False
 
     if request.method=='GET':
         return render(request, 'lanchonete/inventario.html',context)
@@ -188,10 +189,12 @@ def inventario(request):
     elif request.method=='POST':
         form_data = request.POST.dict()
 
-        produtos = []
-        if form_data['Nome_do_Item'] != '' and form_data['Categoria'] != '':
-            Produtos.objects.create(id, valor= 'Preço', estoque='0', nome='Nome_do_Item', tipo='Categoria') 
-
+        if form_data['nome_do_item'] != '' and form_data['categoria'] != '':
+            Produto.objects.create(valor= form_data['preco'], estoque=  0, nome= form_data['nome_do_item'], tipo= form_data['categoria'])
+            context['item_adicionado'] = True
+            
+        return render(request, 'lanchonete/inventario.html',context)
+    
     else:
         return HttpResponse('Requisição inválida!')
         
