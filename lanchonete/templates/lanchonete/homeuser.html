@@ -1,23 +1,10 @@
 <!doctype html>
 <html lang="en">
-    {% include 'lanchonete/head.html' %}
+  {% include 'lanchonete/head.html' %} {% load static %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
+  <link rel="stylesheet" type="text/css" href="{% static 'lanchonete/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'lanchonete/carrinho.css' %}">
+  
   <body>
     
   {% include 'lanchonete/header.html' %}
@@ -39,18 +26,17 @@
       <h4> Seu Saldo é de X TB: </h4>
       <h2>Histórico
       </h2>
-      <form class="d-flex">
-        <div id="salgado_group" class="btn-group" role="group">
-          <select name="salgado_tipo" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+      <form method='POST'>
+        {% csrf_token %}
+        <div id="transacoes_do_usuario" class="btn-group"  role="group">
+          <select name="tipo_de_transacao" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Escolha
-            <option value="">Nada</option>
-            <option value="">Compras</option>
-            <option value="">Pagamentos</option>
-          </select>
-        </div>
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+            <option value="tudo">Tudo</option>
+            <option value="compras">Compras</option>
+            <option value="pagamentos">Pagamentos</option>
+          </select> 
+          <button class="btn btn-outline-success"  type="submit">Filtrar</button>
+        </div>   
       </form>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
@@ -64,6 +50,18 @@
               <th>Total</th>
             </tr>
           </thead>
+          <tbody>
+            {% for itens in transacoes %}
+            <tr>
+              <th value="{{itens}}"> {{itens.data}}</th>
+              <th value="{{itens}}"> {{itens}}</th>
+              <th value="{{itens}}"> {{itens.produtos}}</th>
+              <th value="{{itens}}"> {{itens}}</th>
+              <th value="{{itens}}"> {{itens.produtos}}</th>
+              <th value="{{itens}}"> {{itens.valor}}</th>
+            </tr>
+            {% endfor %}
+          </tbody>
         </table>
       </div>
   </body>
