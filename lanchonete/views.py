@@ -111,7 +111,15 @@ def homeuser(request):
 def pagamento(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'pagamento')
-    return render(request, 'lanchonete/pagamento.html',context)
+    if request.method=='GET':
+        return render(request, 'lanchonete/pagamento.html',context)
+
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        if form_data['forma_de_pagamento'] != '':
+            Pagamento.objects.create(user=UserTL(id=1),especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])
+        return render(request, 'lanchonete/pagamento.html',context)
+
     
 def carrinho(request):
     produto = {
