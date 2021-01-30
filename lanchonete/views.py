@@ -169,6 +169,11 @@ def carrinho(request):
         return HttpResponse('Requisição inválida!')
 
 def estoque(request):
+    produto = {
+        'salgado': Produto.objects.filter(tipo='salgado'),
+        'doce': Produto.objects.filter(tipo='doce'),
+        'bebida': Produto.objects.filter(tipo='bebida'),
+    }
     context = {**global_context, 'nome_do_usuario':'Thalles'}
     context = setPageActive(context,'estoque')
     return render(request, 'lanchonete/estoque.html',context)
@@ -189,10 +194,21 @@ def inventario(request):
     elif request.method=='POST':
         form_data = request.POST.dict()
 
-        if form_data['nome_do_item'] != '' and form_data['categoria'] != '':
+        if form_data['nome_do_formulario'] == "formulario_adicionar_item" and form_data['nome_do_item'] != '':
             Produto.objects.create(valor= form_data['preco'], estoque=  0, nome= form_data['nome_do_item'], tipo= form_data['categoria'])
             context['item_adicionado'] = True
+        
+        elif form_data['nome_do_formulario'] == "formulario_filtrar":
+            if form_data['pesquisa'] == "todos":
+                context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
+            elif form_data['pesquisa'] == "salgado":
+                context['listagem_produtos'] = [*list(produto["salgado"])]
+            elif form_data['pesquisa'] == "doce":
+                context['listagem_produtos'] = [*list(produto["doce"])]
+            elif form_data['pesquisa'] == "bebida":
+                context['listagem_produtos'] = [*list(produto["bebida"])]
             
+
         return render(request, 'lanchonete/inventario.html',context)
     
     else:
