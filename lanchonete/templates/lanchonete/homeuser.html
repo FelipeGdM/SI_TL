@@ -31,7 +31,7 @@
         <h1 class="h2">Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalhar</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary"></button>
           </div>
 
         </div>
@@ -40,16 +40,15 @@
       <h2>Histórico
       </h2>
       <form class="d-flex">
-        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Escolha
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <li><a class="dropdown-item" href="#">Todos</a></li>
-          <li><a class="dropdown-item" href="#">Bebidas</a></li>
-          <li><a class="dropdown-item" href="#">Doces</a></li>
-          <li><a class="dropdown-item" href="#">Salgados</a></li>
-          <li><a class="dropdown-item" href="#">Pagamentos</a></li>
-        </ul>
+        <div id="salgado_group" class="btn-group" role="group">
+          <select name="salgado_tipo" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Escolha
+            <option value="">Nada</option>
+            <option value="">Compras</option>
+            <option value="">Pagamentos</option>
+          </select>
+        </div>
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
@@ -65,24 +64,6 @@
               <th>Total</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-              <td>libero</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-              <td>libero</td>
-            </tr>
-          </tbody>
         </table>
       </div>
   </body>

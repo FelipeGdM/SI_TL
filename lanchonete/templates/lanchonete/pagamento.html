@@ -30,29 +30,27 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Pagamento</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Detalhar</button>
-          </div>
         </div>
       </div>
       <h4> Carrinho: </h4>
       <h4> Saldo Atual + Carrinho: </h4>
-<div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Forma de Pagamento
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <li><a class="dropdown-item" href="#">Dinheiro</a></li>
-      <li><a class="dropdown-item" href="#">Cartão</a></li>
-      <li><a class="dropdown-item" href="#">Pic Pay</a></li>
-    </ul>
-    <input type="number" value="0" min="0" max="1000" step="1"/>
-  </div>  
+      <form>
+      <div id="pagamento_compra" class="btn-group" role="group">
+        <input name="quantia_paga" class='mx-2' type="number" value="0" min="0" max="1000" step="1" />
+        <select name="forma_de_pagamento" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Escolha
+          <option value="">Nada</option>
+          <option value="">Espécie</option>
+          <option value="">Cartão</option>
+          <option value="">Pic Pay</option>
+        </select>
+      </div>
   <br>
   <br>
   <h4> Saldo após Pagamento: </h4>
-  <button type="button" class="btn btn-danger">Agora não</button>
-  <button type="button" class="btn btn-success">Pagar agora</button>
-
+  <button type="submit" class="btn btn-danger">Agora não</button>
+  <button type="submit" class="btn btn-success">Pagar agora</button>
+  </form>
   </body>
 </html>
