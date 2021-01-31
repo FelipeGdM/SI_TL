@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from .utils import setPageActive
 from .utils import setPageActiveuser
 from .models import Produto, Compra, UserTL,Pagamento
@@ -73,10 +72,8 @@ def signin(request):
 
 def homeuser(request):
     
-    transacoes = {
-        'compra': Compra.objects.filter(user=UserTL(id=1)),
-        'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
-    }
+    transacoes = [*list(Compra.objects.filter(user=UserTL(id=1))),*list(Pagamento.objects.filter(user=UserTL(id=1)))]
+    #transacoes = transacoes.sort(key = lambda x:x['data'], reverse=True)
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'homeuser')
     context['transacoes'] = transacoes
@@ -86,24 +83,19 @@ def homeuser(request):
 
     elif request.method=='POST':
         form_data = request.POST.dict()
-        print(form_data)
         if form_data.get('tipo_de_transacao') == 'tudo':
-            transacoes = {
-                Compra.objects.filter(user=UserTL(id=1)) , Pagamento.objects.filter(user=UserTL(id=1))
-            }
+            transacoes = [*list(Compra.objects.filter(user=UserTL(id=1))),*list(Pagamento.objects.filter(user=UserTL(id=1)))]
             context['transacoes'] = transacoes
 
         if form_data.get('tipo_de_transacao') == 'compras':
-            transacoes = {
-                Compra.objects.filter(user=UserTL(id=1)),
-            }
+            transacoes = Compra.objects.filter(user=UserTL(id=1))
             context['transacoes'] = transacoes
+
         if form_data.get('tipo_de_transacao') == 'pagamentos':
-            transacoes = {
-                Pagamento.objects.filter(user=UserTL(id=1)),
-            }
+            transacoes = Pagamento.objects.filter(user=UserTL(id=1))
             context['transacoes'] = transacoes
         
+        context['form_data'] = form_data
         return render(request, 'lanchonete/homeuser.html',context)
 
         #maracutaias legais
@@ -116,8 +108,11 @@ def pagamento(request):
 
     elif request.method=='POST':
         form_data = request.POST.dict()
-        if form_data['forma_de_pagamento'] != '':
-            Pagamento.objects.create(user=UserTL(id=1),especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])
+        context['pagamento_feito'] = False
+        if form_data['forma_de_pagamento'] != '' and form_data['quantia_paga']!= '0':
+            context['pagamento_feito'] = True
+            Pagamento.objects.create(user=UserTL(id=1),especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])     
+
         return render(request, 'lanchonete/pagamento.html',context)
 
     

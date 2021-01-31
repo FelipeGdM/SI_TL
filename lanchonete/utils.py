@@ -14,3 +14,4 @@ def setPageActiveuser(context, page_name):
       else:
         context['sidebar_pages_user'][n]['active'] = False  
   return context
+
