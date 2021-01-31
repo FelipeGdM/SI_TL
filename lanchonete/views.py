@@ -217,7 +217,7 @@ def inventario(request):
                 context['listagem_produtos'] = [*list(produto["doce"])]
             elif form_data['pesquisa'] == "bebida":
                 context['listagem_produtos'] = [*list(produto["bebida"])]
-            
+        
 
         return render(request, 'lanchonete/inventario.html',context)
     
@@ -227,7 +227,7 @@ def inventario(request):
 
 def historico(request, id=None):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    id = request.GET.get('id','0')
+    context['item_id'] = request.GET.get('id','0')
     return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
