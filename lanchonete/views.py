@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import F
 from .utils import setPageActive
 from .utils import setPageActiveuser
-from .models import Produto, Compra, UserTL,Pagamento
+from .models import Produto, Compra, UserTL,Pagamento, Evento, TipoEvento
 
 sidebar_pages = [
     {
@@ -112,6 +113,7 @@ def pagamento(request):
         if form_data['forma_de_pagamento'] != '' and form_data['quantia_paga']!= '0':
             context['pagamento_feito'] = True
             Pagamento.objects.create(user=UserTL(id=1),especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])     
+            Evento.objects.create(info=f'Pagou {form_data["quantia_paga"]}TBs', tipo='Pagamento')
 
         return render(request, 'lanchonete/pagamento.html',context)
 
@@ -150,8 +152,13 @@ def carrinho(request):
             })
         
         if len(produtos) > 0:
-            Compra.objects.create(user=UserTL(id=1), produtos=produtos, valor=10)
+            valor_compra = 0
+            for prod in produtos:
+                Produto.objects.filter(nome=prod['nome']).update(estoque=F('estoque')-prod['quantidade'])
+                Evento.objects.create(info=f'Comprou {prod["quantidade"]} de {prod["nome"]}', tipo="Compra")
+                valor_compra += int(prod['quantidade'])*Produto.objects.filter(nome=prod['nome']).get().valor
 
+            Compra.objects.create(user=UserTL(id=1), produtos=produtos, valor=valor_compra)
             context['compra_finalizada'] = True
             return render(request, 'lanchonete/carrinho.html', context)
         else:
