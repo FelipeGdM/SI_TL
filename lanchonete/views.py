@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.db.models import F
 from .utils import setPageActive
 from .utils import setPageActiveuser
+from .utils import calculaSaldoConsumidor
 from .models import Produto, Compra, UserTL,Pagamento, Evento, TipoEvento
 
 sidebar_pages = [
@@ -69,14 +70,16 @@ def dashboard(request):
     return HttpResponse('Dashboard')
 
 def signin(request):
-    return render(request, 'lanchonete/signin.html') 
-
+    return render(request, 'lanchonete/signin.html')    
+def register(request):
+    return render(request, 'lanchonete/register.html') 
 def homeuser(request):
     
     transacoes = [*list(Compra.objects.filter(user=UserTL(id=1))),*list(Pagamento.objects.filter(user=UserTL(id=1)))]
     #transacoes = transacoes.sort(key = lambda x:x['data'], reverse=True)
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'homeuser')
+    context['saldo_do_usuario'] = calculaSaldoConsumidor(1)
     context['transacoes'] = transacoes
 
     if request.method=='GET':

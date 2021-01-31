@@ -25,12 +25,11 @@ def calculaSaldoConsumidor(usuario_id):
   total_comprado = 0
   #Calcula o valor total associados a compras:
   for compra in compras:
-    for produto in compra['produtos']:
-      total_comprado += produto['valor']
+      total_comprado += compra.valor
 
   # Calcula o valor total de pagamentos:
-  for val in pagamentos['valor']:
-    total_pago += val
+  for val in pagamentos:
+    total_pago += val.valor
   return total_pago - total_comprado
 
 def calculaSaldoTotal():
