@@ -78,7 +78,7 @@
                 {{itens.id}}
               </td>
               <td>
-                <input type="nome" class="form-control" id="exampleFormControlInput1" value="{{itens.nome}}">
+                <input type="nome" class="form-control btn-sm" id="exampleFormControlInput1" value="{{itens.nome}}">
               </td>
               <td>
                 <input type="number" value="{{itens.valor}}" min="0" max="1000" step="1" />
@@ -89,18 +89,15 @@
               <td>
                 <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
                   <a class="btn btn-secondary btn-sm" href="/historico/?id={{itens.id}}">Ver Histórico</a>
-                  <button type="button" class="btn btn-danger btn-sm">Remover Item</button>
+                  <a class="btn btn-danger btn-sm" href="produto/delete/{{itens.id}}">Remover Item</a>
+                  <input type="hidden" name="nome_do_formulario" value="formulario_alterar_inventario"/>
+                  <button type="submit" class="btn btn-success btn-sm">Alterar</button>
                 </div>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
-        <div class="btn-group" role="group">
-          <input type="Nome" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Evento">
-          <input type="hidden" name="nome_do_formulario" value="formulario_alterar_inventario" />
-          <button type="button" class="btn btn-success col-10">Aplicar Alterações</button>
-        </div>
       </div>
     </form>
   </main>
