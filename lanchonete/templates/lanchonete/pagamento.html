@@ -17,8 +17,13 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Pagamento</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-        </div>
       </div>
+      </div>
+      {% if pagamento_feito %}
+      <div class="alert alert-success mt-4 col-4" role="alert">
+        <h5>Pagamento feito com sucesso!</h5>
+      </div>
+      {% endif %}
       <h4> Saldo Atual: </h4>
       <form method ='POST'> 
         {% csrf_token %}
@@ -31,9 +36,9 @@
           <option value="0">Cartão</option>
         </select>
         </div>
-        <h4> Saldo após Pagamento: </h4>
         <button id='pagar_agora' type="submit" class="btn btn-success">Pagar</button>
       </div>
       </form>
+
   </body>
 </html>

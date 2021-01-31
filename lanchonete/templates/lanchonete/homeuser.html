@@ -30,10 +30,10 @@
         {% csrf_token %}
         <div id="transacoes_do_usuario" class="btn-group"  role="group">
           <select name="tipo_de_transacao" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <option value="tudo">Tudo</option>
-            <option value="compras">Compras</option>
-            <option value="pagamentos">Pagamentos</option>
+            aria-expanded="false" >
+            <option {% if form_data.tipo_de_transacao == 'tudo' %} selected="selected" {% endif %} value="tudo">Tudo</option>
+            <option {% if form_data.tipo_de_transacao == 'compras' %} selected="selected" {% endif %} value="compras">Compras</option>
+            <option {% if form_data.tipo_de_transacao == 'pagamentos' %} selected="selected" {% endif %} value="pagamentos">Pagamentos</option>
           </select> 
           <button class="btn btn-outline-primary"  type="submit">Filtrar</button>
         </div>   
