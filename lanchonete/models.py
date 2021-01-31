@@ -9,6 +9,7 @@ class UserTL(models.Model):
 
 class Produto(models.Model):
     id = models.AutoField(primary_key=True)
+    disponivel = models.BooleanField(default=True)
     valor = models.IntegerField()
     estoque = models.IntegerField()
     nome = models.CharField(max_length=64)
