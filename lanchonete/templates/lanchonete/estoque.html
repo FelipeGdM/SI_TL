@@ -1,22 +1,6 @@
 <!doctype html>
 <html lang="en">
-    {% include 'lanchonete/head.html' %}
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+{% include 'lanchonete/head.html' %}
 
 <body>
   
@@ -26,44 +10,44 @@
 
   {% include 'lanchonete/sidebar.html' %}
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Estoque</h1>
-      </div>
-      <h2>Produtos</h2>
-      <form class="d-flex" method="POST">
-        {% csrf_token %}
-        <select name="pesquisa" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Tipo
-          <option value="todos">Todos</option>
-          <option value="salgado">Salgado</option>
-          <option value="bebida">Bebida</option>
-          <option value="doce">Doce</option>
-        </select>
-        <button class="btn btn-outline-primary" type="submit">Filtrar</button>
-      </form>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Preço (TBs)</th>
-              <th>Quantidade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for itens in listagem_produtos %}
-            <tr>
-              <td>{{itens.nome}}</td>
-              <td>{{itens.valor}}</td>
-              <td>{{itens.estoque}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Estoque</h1>
+    </div>
+    <h2>Produtos</h2>
+    <form class="d-flex" method="POST">
+      {% csrf_token %}
+      <select name="pesquisa" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Tipo
+        <option value="todos">Todos</option>
+        <option value="salgado">Salgado</option>
+        <option value="bebida">Bebida</option>
+        <option value="doce">Doce</option>
+      </select>
+      <button class="btn btn-outline-primary" type="submit">Filtrar</button>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Preço (TBs)</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for itens in listagem_produtos %}
+          <tr>
+            <td>{{itens.nome}}</td>
+            <td>{{itens.valor}}</td>
+            <td>{{itens.estoque}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
 </body>
 </html>
