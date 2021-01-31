@@ -18,6 +18,43 @@
           <h1 class="h2">CERNALDO</h1>
         </div>
 
+        <form method="POST">
+          {% csrf_token %}
+          <div id="transacoes_do_usuario" class="btn-group" role="group">
+            <select name="tipo_de_transação" type="button" class="btn btn-primary dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <option value="tudo">Tudo</option>
+              <option value="compras">Compras</option>
+              <option value="pagamentos">Pagamentos</option>              
+            </select>
+            <button class="btn-outline-primary" type="submit">Filtrar</button>
+          </div>
+        </form>
+
+        <div class="table-resposive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <th>Data</th>
+              <th>Evento</th>
+              <th>Item</th>
+              <th>TB</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+            </thead>
+            <tbody>
+              {% for itens in trasacoes %}
+              <tr>
+                <th value="{{itens}}"> {{itens.data}}</th>
+                <th value="{{itens}}"> {{itens}}</th>
+                <th value="{{itens}}"> {{itens.produtos}}</th>
+                <th value="{{itens}}"> {{itens}}</th>
+                <th value="{{itens}}"> {{itens.produtos}}</th>
+                <th value="{{itens}}"> {{itens.valor}}</th>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!--
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
@@ -58,6 +95,7 @@
             </tbody>
           </table>
         </div>
+      -->
         <input class="form-control" type="text" placeholder="Descrição eventualidade" aria-label="default input example">
         <input class="form-control" type="text" placeholder="qtde de TB" aria-label="default input example">
         <button type="button" class="btn btn-sm btn-outline-secondary">OK</button>

@@ -123,3 +123,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# dados temporarios que nao devem ser sincronizados
+lanchonete/migrations/0001_initial.py

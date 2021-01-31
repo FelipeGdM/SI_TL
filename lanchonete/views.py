@@ -251,6 +251,35 @@ def RainhaSaldoCons(request):
     return render(request, 'lanchonete/RainhaSaldoCons.html',context)
 
 def RainhaSaldoConsDetalhe(request):
-    context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'RainhaSaldoConsDetalhe')
-    return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
+    transacoes = {
+        'compra': Compra.objects.filter(user=UserTL(id=1)),
+        'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
+    }
+    context = {**context_user, 'nome_do_usuario':'Thalles'}
+    context = setPageActiveuser(context,'RainhaSaldoConsDetalhe')
+    context['transacoes'] = transacoes
+
+    if request.method=='GET':
+        return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
+
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        print(form_data)
+        if form_data.get('tipo_de_transacao') == 'tudo':
+            transacoes = {
+                Compra.objects.filter(user=UserTL(id=1)) , Pagamento.objects.filter(user=UserTL(id=1))
+            }
+            context['transacoes'] = transacoes
+
+        if form_data.get('tipo_de_transacao') == 'compras':
+            transacoes = {
+                Compra.objects.filter(user=UserTL(id=1)),
+            }
+            context['transacoes'] = transacoes
+        if form_data.get('tipo_de_transacao') == 'pagamentos':
+            transacoes = {
+                Pagamento.objects.filter(user=UserTL(id=1)),
+            }
+            context['transacoes'] = transacoes
+        
+        return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
