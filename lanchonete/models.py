@@ -17,18 +17,18 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
-class Evento(models.Model):
+class TipoEvento(models.Model):
     id = models.AutoField(primary_key=True)
     descricao = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.descricao
+        return f'{self.id} - {self.descricao}'
 
-class Historico(models.Model):
+class Evento(models.Model):
     id = models.AutoField(primary_key=True)
-    tipo = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=64)
     info = models.CharField(max_length=64)
-    data = models.DateTimeField(auto_now_add=True)
+    data = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.info
