@@ -10,25 +10,25 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': 'rainhahome'
+        'link': '/rainhahome'
     },
     {
         'name': 'Saldo consumidores',
         'icon': 'users',
         'active': False,
-        'link': 'RainhaSaldoCons'
+        'link': '/RainhaSaldoCons'
     },   
     {
         'name': 'Estoque',
         'icon': 'house',
         'active': False,
-        'link': 'estoque'
+        'link': '/estoque'
     },
     {
         'name': 'Inventário',
         'icon': 'house',
         'active': False,
-        'link': 'inventario'
+        'link': '/inventario'
     }
 ]
 
@@ -37,19 +37,19 @@ sidebar_pages_user = [
         'name': 'Dashboard',
         'icon': 'house',
         'active': False,
-        'link': 'homeuser'
+        'link': '/homeuser'
     },
     {
         'name': 'Carrinho',
         'icon': 'house',
         'active': False,
-        'link': 'carrinho'
+        'link': '/carrinho'
     },
     {
         'name': 'Pagamento',
         'icon': 'house',
         'active': False,
-        'link': 'pagamento'
+        'link': '/pagamento'
     }
 ]
 
@@ -225,16 +225,23 @@ def inventario(request):
             elif form_data['pesquisa'] == "bebida":
                 context['listagem_produtos'] = [*list(produto["bebida"])]
         
+        #elif form_data['nome_do_formulario'] == "formulario_alterar_inventario":
+            
 
         return render(request, 'lanchonete/inventario.html',context)
     
     else:
         return HttpResponse('Requisição inválida!')
         
+def produtoDelete(request, id=None):
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context['id'] = id
+    Produto.objects.filter(id=id).delete()
+    return render(request, 'lanchonete/produtoDelete.html',context)
 
 def historico(request, id=None):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context['item_id'] = request.GET.get('id','0')
+    context['item_id'] = id
     return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
