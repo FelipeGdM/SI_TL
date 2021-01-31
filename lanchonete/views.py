@@ -225,9 +225,9 @@ def inventario(request):
         return HttpResponse('Requisição inválida!')
         
 
-def historico(request):
+def historico(request, id=None):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'historico')
+    id = request.GET.get('id','0')
     return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
