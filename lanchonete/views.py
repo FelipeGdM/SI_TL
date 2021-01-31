@@ -111,7 +111,15 @@ def homeuser(request):
 def pagamento(request):
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'pagamento')
-    return render(request, 'lanchonete/pagamento.html',context)
+    if request.method=='GET':
+        return render(request, 'lanchonete/pagamento.html',context)
+
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        if form_data['forma_de_pagamento'] != '':
+            Pagamento.objects.create(user=UserTL(id=1),especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])
+        return render(request, 'lanchonete/pagamento.html',context)
+
     
 def carrinho(request):
     produto = {
@@ -128,7 +136,7 @@ def carrinho(request):
 
     elif request.method=='POST':
         form_data = request.POST.dict()
-        # Maracutaias do banco
+
         produtos = []
         if form_data['salgado_tipo'] != '' and form_data['salgado_qtde'] != '0':
             produtos.append({
@@ -161,9 +169,29 @@ def carrinho(request):
         return HttpResponse('Requisição inválida!')
 
 def estoque(request):
-    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    produto = {
+        'salgado': Produto.objects.filter(tipo='salgado', disponivel=True),
+        'doce': Produto.objects.filter(tipo='doce', disponivel=True),
+        'bebida': Produto.objects.filter(tipo='bebida', disponivel=True),
+    }
+    context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'estoque')
-    return render(request, 'lanchonete/estoque.html',context)
+    if request.method=='GET':
+        return render(request, 'lanchonete/estoque.html',context)
+    
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+
+        if form_data['pesquisa'] == "todos":
+            context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
+        elif form_data['pesquisa'] == "salgado":
+            context['listagem_produtos'] = [*list(produto["salgado"])]
+        elif form_data['pesquisa'] == "doce":
+            context['listagem_produtos'] = [*list(produto["doce"])]
+        elif form_data['pesquisa'] == "bebida":
+            context['listagem_produtos'] = [*list(produto["bebida"])]
+        
+        return render(request, 'lanchonete/estoque.html',context)
 
 def inventario(request):
     produto = {
@@ -173,6 +201,7 @@ def inventario(request):
     }
     context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'inventario')
+    context['item_adicionado'] = False
 
     if request.method=='GET':
         return render(request, 'lanchonete/inventario.html',context)
@@ -180,10 +209,23 @@ def inventario(request):
     elif request.method=='POST':
         form_data = request.POST.dict()
 
-        produtos = []
-        if form_data['Nome_do_Item'] != '' and form_data['Categoria'] != '':
-            Produtos.objects.create(id, valor= 'Preço', estoque='0', nome='Nome_do_Item', tipo='Categoria') 
+        if form_data['nome_do_formulario'] == "formulario_adicionar_item" and form_data['nome_do_item'] != '':
+            Produto.objects.create(valor= form_data['preco'], estoque=  0, nome= form_data['nome_do_item'], tipo= form_data['categoria'])
+            context['item_adicionado'] = True
+        
+        elif form_data['nome_do_formulario'] == "formulario_filtrar":
+            if form_data['pesquisa'] == "todos":
+                context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
+            elif form_data['pesquisa'] == "salgado":
+                context['listagem_produtos'] = [*list(produto["salgado"])]
+            elif form_data['pesquisa'] == "doce":
+                context['listagem_produtos'] = [*list(produto["doce"])]
+            elif form_data['pesquisa'] == "bebida":
+                context['listagem_produtos'] = [*list(produto["bebida"])]
+            
 
+        return render(request, 'lanchonete/inventario.html',context)
+    
     else:
         return HttpResponse('Requisição inválida!')
         

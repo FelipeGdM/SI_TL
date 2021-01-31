@@ -19,23 +19,21 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         </div>
       </div>
-      <h4> Carrinho: </h4>
-      <h4> Saldo Atual + Carrinho: </h4>
-      <form>
+      <h4> Saldo Atual: </h4>
+      <form method ='POST'> 
+        {% csrf_token %}
       <div id="pagamento_compra" class="btn-group" role="group">
         <input name="quantia_paga" class='mx-2' type="number" value="0" min="0" max="1000" step="1" />
         <select name="forma_de_pagamento" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
           aria-expanded="false">
-          Escolha
           <option value="">Nada</option>
-          <option value="">Espécie</option>
-          <option value="">Cartão</option>
+          <option value="1">Espécie</option>
+          <option value="0">Cartão</option>
         </select>
+        </div>
+        <h4> Saldo após Pagamento: </h4>
+        <button id='pagar_agora' type="submit" class="btn btn-success">Pagar</button>
       </div>
-  <br>
-  <br>
-  <h4> Saldo após Pagamento: </h4>
-  <button id='pagar_agora' type="submit" class="btn btn-success">Pagar agora</button>
-  </form>
+      </form>
   </body>
 </html>
