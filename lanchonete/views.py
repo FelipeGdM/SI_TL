@@ -84,6 +84,7 @@ def signin(request):
         #     #maracutaias de quem não se logou
         #     return HttpResponse('Usuário ou Senha inválidos')
         return render(request, 'lanchonete/signin.html') 
+
 def register(request):
     if request.method=='GET':
         return render(request, 'lanchonete/register.html') 
@@ -92,6 +93,7 @@ def register(request):
         user = User.objects.create_user(username=form_data['first_name']+form_data['last_name']  ,email=form_data['email'] ,password=form_data['password_confirmation'])
         UserTL.objects.create(user=user, is_rainha=False)
         return render(request, 'lanchonete/register.html') 
+
 def homeuser(request):
     
     transacoes = [*list(Compra.objects.filter(user=UserTL(id=1))),*list(Pagamento.objects.filter(user=UserTL(id=1)))]
