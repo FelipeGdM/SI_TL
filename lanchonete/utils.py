@@ -18,10 +18,10 @@ def setPageActiveuser(context, page_name):
         context['sidebar_pages_user'][n]['active'] = False  
   return context
 
-def calculaSaldoConsumidor(usuario_id):
+def calculaSaldoConsumidor(user_tl):
   #Filtra as Compras e Pagamentos associados a um usuário
-  compras = Compra.objects.filter(user=UserTL(id=usuario_id))
-  pagamentos = Pagamento.objects.filter(user=UserTL(id=usuario_id))
+  compras = Compra.objects.filter(user=user_tl)
+  pagamentos = Pagamento.objects.filter(user=user_tl)
   total_pago = 0
   total_comprado = 0
   #Calcula o valor total associados a compras:
