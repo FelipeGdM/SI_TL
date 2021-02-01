@@ -89,8 +89,11 @@ def signin(request):
         if usuario_logado is not None:
             if usuario_logado.is_active:
                 login(request, usuario_logado)
-                
-                return redirect('homeuser')
+                user = UserTL.objects.filter(user=request.user).first()
+                if user.is_rainha:
+                    return redirect('rainhaHome')
+                else:
+                    return redirect('homeuser')
 
         return HttpResponse('Usuário ou Senha inválidos')
 
@@ -325,6 +328,7 @@ def rainhaHome(request):
     user = UserTL.objects.filter(user=request.user).first()
     if not user.is_rainha:
         return redirect('homeuser')
+    context = {**global_context, 'nome_de_usuario':request.user.first_name}
     pagamentos_em_especie = Pagamento.objects.filter(especie=True)
     pagamentos_em_cartao = Pagamento.objects.filter(especie=False)
 
@@ -343,7 +347,6 @@ def rainhaHome(request):
 
     disponivel_total = disponivel_em_cartao + disponivel_em_especie
 
-    context = {**global_context,  'nome_de_usuario': request.user.first_name}
     context = setPageActive(context, 'rainhaHome')
     context['disponivel_em_especie'] = disponivel_em_especie
     context['disponivel_em_cartao'] = disponivel_em_cartao
