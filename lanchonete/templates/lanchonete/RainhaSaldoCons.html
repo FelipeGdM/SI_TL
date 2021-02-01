@@ -19,46 +19,27 @@
     {% endif %} -->
     <div
       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Escolha um usuário para maiores detalhes</h1>
+      <h1 class="h2">Saldo dos Consumidores</h1>
     </div>
 
-    <!-- <form id="formulario_filtrar" class="d-flex" method="POST">
-      {% csrf_token %}
-      <select name="pesquisa" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown" aria-expanded="false">
-        Tipo
-        <option value="todos">Todos</option>
-        <option value="salgado">Salgado</option>
-        <option value="bebida">Bebida</option>
-        <option value="doce">Doce</option>
-      </select>
-      <input type="hidden" name="nome_do_formulario" value="formulario_filtrar" />
-      <button class="btn btn-outline-primary" type="submit">Filtrar</button>
-    </form> -->
     <form id="formulario_selecionar_usuario" class="d-flex" method="POST">
       {% csrf_token %}
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-lg">
           <thead>
             <tr>
               <th>Usuário</th>
               <th>Saldo</th>
-              <th>Último pagamento</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
-            {% for n in listagem_usuarios %} <!-- views.py def inventario-->
+            {% for n in usuarios %} <!-- views.py def inventario-->
             <tr>
               <td>
-                {{n.id}}
+                {{n.user}}
               </td>
               <td>
-                {{n.id}}
-              </td>
-              <td>
-                <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
-                  <a class="btn btn-secondary btn-sm" href="/RainhaSaldoConsDetalhe/{{itens.id}}">Ver Histórico</a>
-                </div>
+                {{n.saldo}}
               </td>
             </tr>
             {% endfor %}

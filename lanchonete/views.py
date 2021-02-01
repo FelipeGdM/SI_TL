@@ -381,11 +381,19 @@ def rainhaHome(request):
 
 @login_required
 def rainhaSaldoCons(request):
+    usuarios_tl = UserTL.objects.filter(is_rainha=False)
+    usuarios = []
+    for usuario in usuarios_tl:
+        usuarios.append({
+            'user': usuario.user,
+            'saldo': calculaSaldoConsumidor(usuario),
+        })
     user = UserTL.objects.filter(user=request.user).first()
     if not user.is_rainha:
         return redirect('homeuser')
     context = {**global_context, 'nome_do_usuario':request.user.first_name}
     context = setPageActive(context,'rainhaSaldoCons')
+    context['usuarios'] = usuarios
     return render(request, 'lanchonete/rainhaSaldoCons.html',context)
 
 @login_required
