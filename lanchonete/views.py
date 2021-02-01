@@ -14,7 +14,7 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': '/rainhahome'
+        'link': '/rainhaHome'
     },
     {
         'name': 'Saldo consumidores',
@@ -285,7 +285,7 @@ def historico(request, id=None):
     context['item_id'] = id
     return render(request, 'lanchonete/historico.html',context)
 
-def rainhahome(request):
+def rainhaHome(request):
     pagamentos_em_especie = Pagamento.objects.filter(especie=True)
     pagamentos_em_cartao = Pagamento.objects.filter(especie=False)
 
@@ -339,21 +339,21 @@ def rainhahome(request):
 
 def rainhaHomeDetalhe(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context, 'RainhaHomeDetalhe')
-    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
+    context = setPageActive(context, 'rainhaHomeDetalhe')
+    return render(request, 'lanchonete/rainhaHomeDetalhe.html',context)
 
-def RainhaSaldoCons(request):
+def rainhaSaldoCons(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'RainhaSaldoCons')
-    return render(request, 'lanchonete/RainhaSaldoCons.html',context)
+    context = setPageActive(context,'rainhaSaldoCons')
+    return render(request, 'lanchonete/rainhaSaldoCons.html',context)
 
-def RainhaSaldoConsDetalhe(request):
+def rainhaSaldoConsDetalhe(request):
     transacoes = {
         'compra': Compra.objects.filter(user=UserTL(id=1)),
         'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
     }
     context = {**context_user, 'nome_do_usuario':'Thalles'}
-    context = setPageActiveuser(context,'RainhaSaldoConsDetalhe')
+    context = setPageActiveuser(context,'rainhaSaldoConsDetalhe')
     context['transacoes'] = transacoes
 
     if request.method=='GET':
@@ -379,4 +379,4 @@ def RainhaSaldoConsDetalhe(request):
             }
             context['transacoes'] = transacoes
         
-        return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
+        return render(request, 'lanchonete/rainhaSaldoConsDetalhe.html',context)

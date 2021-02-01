@@ -13,8 +13,8 @@ urlpatterns = [
     path('homeuser',views.homeuser, name='homeuser'),
     path('pagamento',views.pagamento, name='pagamento'),
     path('carrinho',views.carrinho, name='carrinho'),
-    path('RainhaSaldoConsDetalhe/<int:id>', views.RainhaSaldoConsDetalhe, name='RainhaSaldoConsDetalhe'),
-    path('RainhaSaldoCons', views.RainhaSaldoCons, name='RainhaSaldoCons'),
-    path('rainhahome', views.rainhahome, name='rainhahome'),
+    path('rainhaSaldoConsDetalhe/<int:id>', views.rainhaSaldoConsDetalhe, name='rainhaSaldoConsDetalhe'),
+    path('rainhaSaldoCons', views.rainhaSaldoCons, name='rainhaSaldoCons'),
+    path('rainhaHome', views.rainhaHome, name='rainhaHome'),
     path('produto/delete/<int:id>', views.produtoDelete, name='produto')
 ]
