@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.db.models import F
 from .utils import setPageActive
 from .utils import setPageActiveuser
+from .utils import calculaSaldoConsumidor
+from .utils import calculaSaldoTotal
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from .models import Produto, Compra, UserTL,Pagamento, Evento, TipoEvento
 
 sidebar_pages = [
@@ -10,7 +14,7 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': '/RainhaHome'
+        'link': '/rainhahome'
     },
     {
         'name': 'Saldo consumidores',
@@ -69,14 +73,33 @@ def dashboard(request):
     return HttpResponse('Dashboard')
 
 def signin(request):
-    return render(request, 'lanchonete/signin.html') 
+    if request.method=='GET':
+        return render(request, 'lanchonete/signin.html')
+    else:   
+        form_data = request.POST.dict()
+        usuario_logado = authenticate(email=form_data['email'], password=form_data['password'])
+        # if user is not None:
+        #     #maracutaias de quem se logou
+        # else:
+        #     #maracutaias de quem não se logou
+        #     return HttpResponse('Usuário ou Senha inválidos')
+        return render(request, 'lanchonete/signin.html') 
+
+def register(request):
+    if request.method=='GET':
+        return render(request, 'lanchonete/register.html') 
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        user = User.objects.create_user(username=form_data['first_name']+form_data['last_name']  ,email=form_data['email'] ,password=form_data['password_confirmation'])
+        UserTL.objects.create(user=user, is_rainha=False)
+        return render(request, 'lanchonete/register.html') 
 
 def homeuser(request):
     
     transacoes = [*list(Compra.objects.filter(user=UserTL(id=1))),*list(Pagamento.objects.filter(user=UserTL(id=1)))]
-    #transacoes = transacoes.sort(key = lambda x:x['data'], reverse=True)
     context = {**context_user, 'nome_do_usuario':'Thalles'}
     context = setPageActiveuser(context,'homeuser')
+    context['saldo_do_usuario'] = calculaSaldoConsumidor(1)
     context['transacoes'] = transacoes
 
     if request.method=='GET':
@@ -117,11 +140,12 @@ def pagamento(request):
 
         return render(request, 'lanchonete/pagamento.html',context)
 
+    
 def carrinho(request):
     produto = {
-        'salgado': Produto.objects.filter(tipo='salgado'),
-        'doce': Produto.objects.filter(tipo='doce'),
-        'bebida': Produto.objects.filter(tipo='bebida'),
+        'salgado': Produto.objects.filter(tipo='salgado', disponivel=True),
+        'doce': Produto.objects.filter(tipo='doce', disponivel=True ),
+        'bebida': Produto.objects.filter(tipo='bebida', disponivel=True),
     }
     context = {**context_user, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActiveuser(context,'carrinho')
@@ -244,6 +268,24 @@ def historico(request, id=None):
     return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
+    pagamentos_em_especie = Pagamento.objects.filter(especie=True)
+    pagamentos_em_cartao = Pagamento.objects.filter(especie=False)
+
+    eventos = Evento.objects.filter()
+
+    disponivel_em_especie = 0
+    disponivel_em_cartao = 0 
+    disponivel_total = 0
+    balanco_consumidores = calculaSaldoTotal()
+    
+    for paga in pagamentos_em_especie:
+        disponivel_em_especie += paga.valor
+
+    for paga in pagamentos_em_cartao:
+        disponivel_em_cartao += paga.valor
+
+    disponivel_total = disponivel_em_cartao + disponivel_em_especie
+
     context = {**global_context,  'nome_de_usuario': 'Thalles'}
     context = setPageActive(context, 'rainhahome')
     context['disponivel_em_especie'] = disponivel_em_especie
@@ -279,27 +321,21 @@ def rainhahome(request):
 
 def rainhahomediscretiza(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context, 'RainhaHomeDetalhe')
-    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
+    context = setPageActive(context,'RainhaHomeDiscretiza')
+    return render(request, 'lanchonete/RainhaHomeDiscretiza.html',context)
 
 def RainhaSaldoCons(request):
-    usuarios = [*list()]
     context = {**global_context, 'nome_do_usuario':'Thalles'}
     context = setPageActive(context,'RainhaSaldoCons')
-    if request.method=='GET':
-        return render(request, 'lanchonete/RainhaSaldoCons.html',context)
+    return render(request, 'lanchonete/RainhaSaldoCons.html',context)
 
-    elif request.method=='POST':
-        form_data = request.POST.dict()
-        context['listagem_usuarios'] = [*list(produto[""])]
-
-def RainhaSaldoConsDetalhe(request,id=None):
-    context['user_id']=id
+def RainhaSaldoConsDetalhe(request):
     transacoes = {
-        'compra': Compra.objects.filter(user=UserTL(id=id)),
-        'pagamentos': Pagamento.objects.filter(user=UserTL(id=id))
+        'compra': Compra.objects.filter(user=UserTL(id=1)),
+        'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
     }
     context = {**context_user, 'nome_do_usuario':'Thalles'}
+    context = setPageActiveuser(context,'RainhaSaldoConsDetalhe')
     context['transacoes'] = transacoes
 
     if request.method=='GET':

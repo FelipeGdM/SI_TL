@@ -14,7 +14,7 @@ urlpatterns = [
     path('carrinho',views.carrinho, name='carrinho'),
     path('RainhaSaldoConsDetalhe/<int:id>', views.RainhaSaldoConsDetalhe, name='RainhaSaldoConsDetalhe'),
     path('RainhaSaldoCons', views.RainhaSaldoCons, name='RainhaSaldoCons'),
-    path('RainhaHomeDetalhe', views.RainhaHomeDetalhe, name='RainhaHomeDetalhe' ),
-    path('RainhaHome', views.RainhaHome, name='RainhaHome'),
+    #path('RainhaHomeDetalhe', views.RainhaHomeDetalhe, name='RainhaHomeDetalhe' ),
+    path('rainhahome', views.rainhahome, name='rainhahome'),
     path('produto/delete/<int:id>', views.produtoDelete, name='produto')
 ]
