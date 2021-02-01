@@ -157,7 +157,7 @@ def pagamento(request):
         if form_data['forma_de_pagamento'] != '' and form_data['quantia_paga']!= '0':
             context['pagamento_feito'] = True
             Pagamento.objects.create(user=user,especie=form_data['forma_de_pagamento'] , valor=form_data['quantia_paga'])     
-            Evento.objects.create(info=f'Pagou {form_data["quantia_paga"]}TBs', tipo='Pagamento')
+            Evento.objects.create(info=f'{user.user} Pagou {form_data["quantia_paga"]}TBs', tipo='Pagamento')
 
         return render(request, 'lanchonete/pagamento.html',context)
 
@@ -200,7 +200,7 @@ def carrinho(request):
             valor_compra = 0
             for prod in produtos:
                 Produto.objects.filter(nome=prod['nome']).update(estoque=F('estoque')-prod['quantidade'])
-                Evento.objects.create(info=f'Comprou {prod["quantidade"]} de {prod["nome"]}', tipo="Compra")
+                Evento.objects.create(info=f'{user.user} Comprou {prod["quantidade"]} de {prod["nome"]}', tipo="Compra")
                 valor_compra += int(prod['quantidade'])*Produto.objects.filter(nome=prod['nome']).get().valor
 
             Compra.objects.create(user=user, produtos=produtos, valor=valor_compra)
