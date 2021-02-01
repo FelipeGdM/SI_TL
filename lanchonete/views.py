@@ -204,6 +204,7 @@ def inventario(request):
     context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'inventario')
     context['item_adicionado'] = False
+    context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
 
     if request.method=='GET':
         return render(request, 'lanchonete/inventario.html',context)
@@ -224,15 +225,25 @@ def inventario(request):
                 context['listagem_produtos'] = [*list(produto["doce"])]
             elif form_data['pesquisa'] == "bebida":
                 context['listagem_produtos'] = [*list(produto["bebida"])]
-        
-        #elif form_data['nome_do_formulario'] == "formulario_alterar_inventario":
-            
 
         return render(request, 'lanchonete/inventario.html',context)
     
     else:
         return HttpResponse('Requisição inválida!')
         
+def produtoEdit(request, id=None, disponibilidade=False, nome_editar=None, preco_editar=None, estoque_editar=None):
+    context = {**global_context, 'nome_do_usuario':'Thalles'}
+    context['id'] = id
+    if disponibilidade != Produto.objects.filter(id=id).get().disponivel:
+        Produto.objects.filter(id=id).update(disponivel=disponibilidade)
+    if nome_editar != Produto.objects.filter(id=id).get().nome:
+        Produto.objects.filter(id=id).update(nome=nome_editar)
+    if preco_editar != Produto.objects.filter(id=id).get().valor:
+        Produto.objects.filter(id=id).update(valor=preco_editar)
+    if estoque_editar != Produto.objects.filter(id=id).get().estoque:
+        Produto.objects.filter(id=id).update(valor=estoque_editar)    
+    return render(request, 'lanchonete/produtoEdit.html',context)
+
 def produtoDelete(request, id=None):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
     context['id'] = id
