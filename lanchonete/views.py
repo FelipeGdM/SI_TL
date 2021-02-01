@@ -203,6 +203,7 @@ def inventario(request):
     context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'inventario')
     context['item_adicionado'] = False
+    context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
 
     if request.method=='GET':
         return render(request, 'lanchonete/inventario.html',context)
@@ -224,14 +225,29 @@ def inventario(request):
             elif form_data['pesquisa'] == "bebida":
                 context['listagem_produtos'] = [*list(produto["bebida"])]
         
-        #elif form_data['nome_do_formulario'] == "formulario_alterar_inventario":
+        elif form_data['nome_do_formulario'] == "formulario_alterar_inventario":
             
+            if form_data['disponibilidade'] != Produto.objects.filter(id=form_data['item_id']).get().disponivel:
+                print("lalala")
+                print(form_data['item_id'])
+                Produto.objects.filter(id=form_data['item_id']).update(disponivel=form_data['disponibilidade'])
+
+            if form_data['nome_editar'] != Produto.objects.filter(id=form_data['item_id']).get().nome:
+                Produto.objects.filter(id=form_data['item_id']).update(nome=form_data['nome_editar'])
+
+            if form_data['preco_editar'] != Produto.objects.filter(id=form_data['item_id']).get().valor:
+                Produto.objects.filter(id=form_data['item_id']).update(valor=form_data['preco_editar'])
+
+            if form_data['estoque_editar'] != Produto.objects.filter(id=form_data['item_id']).get().estoque:
+                print("lalala")
+                Produto.objects.filter(id=form_data['item_id']).update(estoque=form_data['estoque_editar'])   
+
 
         return render(request, 'lanchonete/inventario.html',context)
     
     else:
         return HttpResponse('Requisição inválida!')
-        
+
 def produtoDelete(request, id=None):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
     context['id'] = id
