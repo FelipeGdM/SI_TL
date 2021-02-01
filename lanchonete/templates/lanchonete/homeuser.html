@@ -23,7 +23,7 @@
 
         </div>
       </div>
-      <h4> Seu Saldo é de X TB: </h4>
+      <h4> Seu Saldo é de {{saldo_do_usuario}} TB: </h4>
       <h2>Histórico
       </h2>
       <form method='POST'>
@@ -43,10 +43,7 @@
           <thead>
             <tr>
               <th>Data</th>
-              <th>Evento</th>
-              <th>Item</th>
-              <th>TB</th>
-              <th>Quantidade</th>
+              <th>Item/Quantidade</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -54,9 +51,6 @@
             {% for itens in transacoes %}
             <tr>
               <th value="{{itens}}"> {{itens.data}}</th>
-              <th value="{{itens}}"> {{itens}}</th>
-              <th value="{{itens}}"> {{itens.produtos}}</th>
-              <th value="{{itens}}"> {{itens}}</th>
               <th value="{{itens}}"> {{itens.produtos}}</th>
               <th value="{{itens}}"> {{itens.valor}}</th>
             </tr>

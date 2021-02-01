@@ -117,7 +117,6 @@ def pagamento(request):
 
         return render(request, 'lanchonete/pagamento.html',context)
 
-    
 def carrinho(request):
     produto = {
         'salgado': Produto.objects.filter(tipo='salgado'),
@@ -249,23 +248,29 @@ def RainhaHome(request):
     context = setPageActive(context,  'RainhaHome')
     return render(request, 'lanchonete/RainhaHome.html',context)
 
-def RainhaHomeDetalhe(request):
-    context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context, 'RainhaHomeDetalhe')
-    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
+# def RainhaHomeDetalhe(request):
+#     context = {**global_context, 'nome_do_usuario':'Thalles'}
+#     context = setPageActive(context, 'RainhaHomeDetalhe')
+#     return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
 
 def RainhaSaldoCons(request):
+    usuarios = [*list()]
     context = {**global_context, 'nome_do_usuario':'Thalles'}
     context = setPageActive(context,'RainhaSaldoCons')
-    return render(request, 'lanchonete/RainhaSaldoCons.html',context)
+    if request.method=='GET':
+        return render(request, 'lanchonete/RainhaSaldoCons.html',context)
 
-def RainhaSaldoConsDetalhe(request):
+    elif request.method=='POST':
+        form_data = request.POST.dict()
+        context['listagem_usuarios'] = [*list(produto[""])]
+
+def RainhaSaldoConsDetalhe(request,id=None):
+    context['user_id']=id
     transacoes = {
-        'compra': Compra.objects.filter(user=UserTL(id=1)),
-        'pagamentos': Pagamento.objects.filter(user=UserTL(id=1))
+        'compra': Compra.objects.filter(user=UserTL(id=id)),
+        'pagamentos': Pagamento.objects.filter(user=UserTL(id=id))
     }
     context = {**context_user, 'nome_do_usuario':'Thalles'}
-    context = setPageActiveuser(context,'RainhaSaldoConsDetalhe')
     context['transacoes'] = transacoes
 
     if request.method=='GET':

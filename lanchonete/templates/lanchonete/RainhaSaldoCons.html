@@ -40,36 +40,24 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>Escolher</th>
               <th>Usuário</th>
               <th>Saldo</th>
               <th>Último pagamento</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {% for itens in listagem_produtos %}
+            {% for n in listagem_usuarios %} <!-- views.py def inventario-->
             <tr>
               <td>
-                <input class="form-check-input" type="checkbox" id="flexCheckChecked" {% if itens.disponivel %} checked {% endif %}>
+                {{n.id}}
               </td>
               <td>
-                {{itens.id}}
-              </td>
-              <td>
-                <input type="nome" class="form-control btn-sm" id="exampleFormControlInput1" value="{{itens.nome}}">
-              </td>
-              <td>
-                <input type="number" value="{{itens.valor}}" min="0" max="1000" step="1" />
-              </td>
-              <td>
-                <input type="number" value="{{itens.estoque}}" min="0" max="1000" step="1" />
+                {{n.id}}
               </td>
               <td>
                 <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
-                  <a class="btn btn-secondary btn-sm" href="/historico/?id={{itens.id}}">Ver Histórico</a>
-                  <a class="btn btn-danger btn-sm" href="produto/delete/{{itens.id}}">Remover Item</a>
-                  <input type="hidden" name="nome_do_formulario" value="formulario_alterar_inventario"/>
-                  <button type="submit" class="btn btn-success btn-sm">Alterar</button>
+                  <a class="btn btn-secondary btn-sm" href="/RainhaSaldoConsDetalhe/{{itens.id}}">Ver Histórico</a>
                 </div>
               </td>
             </tr>

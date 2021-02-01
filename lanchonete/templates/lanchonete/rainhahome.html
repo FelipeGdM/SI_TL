@@ -17,140 +17,61 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">DASHBOARD</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
-            </div>
           </div>
         </div>
+        <form method="POST">
+          {% csrf_token %}
 
+        {% if retirada_sucesso %}
+          <div class="alert alert-success mt-4 col-4" role="alert">
+            <h5>Retirada de Caixa Feita com Sucesso!</h5>
+          </div>
+        {% endif %}
         <div class="container">
           <div class="row">
             <div class="col">
-              DINHEIRO DISPONÍVEL PARA COMPRA:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="Input readonly que mostra a soma" aria-label="readonly input example" readonly>
-            </div>
-            <div class="col">
-              TB
+              <h3>Dinheiro Disponível:   {{disponivel_total}} TB</h3>
             </div>
           </div>
           <div class="row">
-            <div class="col">
-              SALDO ANTERIOR:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="Input readonly que mostra saldo anterior" aria-label="readonly input example" readonly>
-            </div>
-            <div class="col">
-              TB
-            </div>
+
           </div>
           <div class="row">
             <div class="col">
-              EM ESPÉCIE:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="0" aria-label="default input example">
-            </div>
-            <div class="col">
-              TB
+              <h5>Em Espécie:   {{disponivel_em_especie}} TB</h5>
             </div>
           </div>
+          <input name="especie_retirado" class='mx-2' type="number" value="0" min="0" max="1000" step="1" />
           <div class="row">
             <div class="col">
-              NO CARTÃO:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="0" aria-label="default input example">
-            </div>
-            <div class="col">
-              TB
+              <h5>No Cartão:   {{disponivel_em_cartao}} TB</h5>
             </div>
           </div>
+          <input name="cartao_retirado" class='mx-2' type="number" value="0" min="0" max="1000" step="1" />
+          <button type="submit" class="btn btn-primary">Retirar Quantias</button>
           <div class="row">
             <div class="col">
-              EVENTUALIDADES:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="0" aria-label="default input example">
-            </div>
-            <div class="col">
-              TB
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              DÉBITO DOS CONSUMIDORES:
-            </div>
-            <div class="col-md-auto">
-              - - - - -
-            </div>
-            <div class="col col-lg-2">
-              <input class="form-control" type="text" placeholder="Input readonly que mostra a soma dos débitos" aria-label="readonly input example" readonly>
-            </div>
-            <div class="col">
-              TB
+            <h4>Balanço dos Consumidores: {{balanco_consumidores}} TB</h4>
             </div>
           </div>
         </div>
-
-        <h1 class="h2">DEMANDA</h1>
+        </form>
+        <h1 class="h2">Atividades</h1>
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
               <tr>
-                <th>ITEM</th>
-                <th>ESGOTA EM</th>
-                <th>RECEPTIVIDADE</th>
+                <th>Data</th>
+                <th>Info</th>
               </tr>
             </thead>
             <tbody>
+              {% for evento in eventos %}
               <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
+                <th value="{{itens}}"> {{evento.data}}</th>
+                <th value="{{itens}}"> {{evento.info}}</th>
               </tr>
-              <tr>
-                <td>1,004</td>
-                <td>dapibus</td>
-                <td>diam</td>
-              </tr>
-              <tr>
-                <td>1,005</td>
-                <td>Nulla</td>
-                <td>quis</td>
-              </tr>
-              <tr>
-                <td>1,006</td>
-                <td>nibh</td>
-                <td>elementum</td>
-              </tr>
-              <tr>
-                <td>1,007</td>
-                <td>sagittis</td>
-                <td>ipsum</td>
-              </tr>
-              <tr>
-                <td>1,008</td>
-                <td>Fusce</td>
-                <td>nec</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
