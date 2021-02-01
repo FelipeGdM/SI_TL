@@ -35,15 +35,12 @@
   <form method='POST'>
     {% csrf_token %}
     <img class="mb-4" src="https://thunderatz.org/static/landing/img/logo.svg" alt="" width="300" height="300">
-    <h1 class="h3 mb-3 fw-normal">Autentique-se com seu Email Thunderatz</h1>
-    <label for="inputEmail" class="visually-hidden">Email address</label>
-    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="visually-hidden">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <h1 class="h3 mb-3 fw-normal">Autentique-se com seu cadastro Thunderatz</h1>
+    <label for="inputEmail" class="visually-hidden">Nome de Usuário</label>
+    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Nome de Usuário" required autofocus>
+    <label for="inputPassword" class="visually-hidden">Senha</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required>
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> <spam>Remember me</spam>
-      </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
     <a href="/register">Criar nova conta</a>
