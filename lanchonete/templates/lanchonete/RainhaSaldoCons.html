@@ -1,65 +1,84 @@
 <!doctype html>
 <html lang="en">
-{% include 'lanchonete/head.html' %} {% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/carrinho.css' %}">
+{% include 'lanchonete/head.html' %}
 
 <body>
 
-  {% include 'lanchonete/header.html' %}
-  
-  <div class="container-fluid">
-  
-    {% include 'lanchonete/sidebar.html' %}
+{% include 'lanchonete/header.html' %}
 
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">SELECIONE OS USUÁRIOS</h1>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label>(n) selecionado(s)</label>
-                </th>
-                <th>USUÁRIO</th>
-                <th>SALDO</th>
-                <th>ÚLTIMO PAGAMENTO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                <td>Arnaldo</td>
-                <td>0</td>
-                <td>20-08-02 19:30</td>
-              </tr>
-              <tr>
-                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                <td>Bernaldo</td>
-                <td>+11</td>
-                <td>20-10-26 00:15</td>
-              </tr>
-              <tr>
-                <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>
-                <td>Cernaldo</td>
-                <td>-16</td>
-                <td>20-10-24 09:35</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">AVISAR</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">DETALHAR</button>
-          </div>
-        </div>
-      </main>
+<div class="container-fluid">
+
+  {% include 'lanchonete/sidebar.html' %}
+
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+    <!-- {% if item_adicionado %}
+    <div class="alert alert-success mt-4 col-4" role="alert">
+      <h5>Item adicionado com sucesso!</h5>
     </div>
-  </div>
+    {% endif %} -->
+    <div
+      class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Escolha um usuário para maiores detalhes</h1>
+    </div>
+
+    <!-- <form id="formulario_filtrar" class="d-flex" method="POST">
+      {% csrf_token %}
+      <select name="pesquisa" type="button" class="btn btn-primary dropdown-toggle col-2" data-bs-toggle="dropdown" aria-expanded="false">
+        Tipo
+        <option value="todos">Todos</option>
+        <option value="salgado">Salgado</option>
+        <option value="bebida">Bebida</option>
+        <option value="doce">Doce</option>
+      </select>
+      <input type="hidden" name="nome_do_formulario" value="formulario_filtrar" />
+      <button class="btn btn-outline-primary" type="submit">Filtrar</button>
+    </form> -->
+    <form id="formulario_selecionar_usuario" class="d-flex" method="POST">
+      {% csrf_token %}
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Escolher</th>
+              <th>Usuário</th>
+              <th>Saldo</th>
+              <th>Último pagamento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for itens in listagem_produtos %}
+            <tr>
+              <td>
+                <input class="form-check-input" type="checkbox" id="flexCheckChecked" {% if itens.disponivel %} checked {% endif %}>
+              </td>
+              <td>
+                {{itens.id}}
+              </td>
+              <td>
+                <input type="nome" class="form-control btn-sm" id="exampleFormControlInput1" value="{{itens.nome}}">
+              </td>
+              <td>
+                <input type="number" value="{{itens.valor}}" min="0" max="1000" step="1" />
+              </td>
+              <td>
+                <input type="number" value="{{itens.estoque}}" min="0" max="1000" step="1" />
+              </td>
+              <td>
+                <div class="btn-group d-flex justify-content-end" role="group" aria-label="Basic example">
+                  <a class="btn btn-secondary btn-sm" href="/historico/?id={{itens.id}}">Ver Histórico</a>
+                  <a class="btn btn-danger btn-sm" href="produto/delete/{{itens.id}}">Remover Item</a>
+                  <input type="hidden" name="nome_do_formulario" value="formulario_alterar_inventario"/>
+                  <button type="submit" class="btn btn-success btn-sm">Alterar</button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </main>
+</div>
 </body>
 </html>

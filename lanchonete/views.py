@@ -10,7 +10,7 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': '/rainhahome'
+        'link': '/RainhaHome'
     },
     {
         'name': 'Saldo consumidores',
@@ -244,15 +244,15 @@ def historico(request, id=None):
     context['item_id'] = id
     return render(request, 'lanchonete/historico.html',context)
 
-def rainhahome(request):
+def RainhaHome(request):
     context = {**global_context,  'nome_de_usuario': 'Thalles'}
-    context = setPageActive(context, 'rainhahome')
-    return render(request, 'lanchonete/rainhahome.html',context)
+    context = setPageActive(context,  'RainhaHome')
+    return render(request, 'lanchonete/RainhaHome.html',context)
 
-def rainhahomediscretiza(request):
+def RainhaHomeDetalhe(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'RainhaHomeDiscretiza')
-    return render(request, 'lanchonete/RainhaHomeDiscretiza.html',context)
+    context = setPageActive(context, 'RainhaHomeDetalhe')
+    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
 
 def RainhaSaldoCons(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
