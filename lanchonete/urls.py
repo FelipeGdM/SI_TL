@@ -12,9 +12,9 @@ urlpatterns = [
     path('homeuser',views.homeuser, name='homeuser'),
     path('pagamento',views.pagamento, name='pagamento'),
     path('carrinho',views.carrinho, name='carrinho'),
-    path('RainhaSaldoConsDetalhe/<int:id>', views.RainhaSaldoConsDetalhe, name='RainhaSaldoConsDetalhe'),
-    path('RainhaSaldoCons', views.RainhaSaldoCons, name='RainhaSaldoCons'),
-    path('RainhaHomeDetalhe', views.RainhaHomeDetalhe, name='RainhaHomeDetalhe' ),
-    path('RainhaHome', views.RainhaHome, name='RainhaHome'),
+    path('rainhaSaldoConsDetalhe/<int:id>', views.rainhaSaldoConsDetalhe, name='rainhaSaldoConsDetalhe'),
+    path('rainhaSaldoCons', views.rainhaSaldoCons, name='rainhaSaldoCons'),
+    path('rainhaHomeDetalhe', views.rainhaHomeDetalhe, name='rainhaHomeDetalhe' ),
+    path('rainhaHome', views.rainhaHome, name='rainhaHome'),
     path('produto/delete/<int:id>', views.produtoDelete, name='produto')
 ]

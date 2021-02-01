@@ -10,13 +10,13 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': '/RainhaHome'
+        'link': '/rainhaHome'
     },
     {
         'name': 'Saldo consumidores',
         'icon': 'users',
         'active': False,
-        'link': '/RainhaSaldoCons'
+        'link': '/rainhaSaldoCons'
     },   
     {
         'name': 'Estoque',
@@ -177,6 +177,8 @@ def estoque(request):
     }
     context = {**global_context, 'nome_do_usuario':'Thalles', 'produtos': produto}
     context = setPageActive(context,'estoque')
+    context['listagem_produtos'] = [*list(produto["salgado"]), *list(produto["doce"]), *list(produto["bebida"])]
+    
     if request.method=='GET':
         return render(request, 'lanchonete/estoque.html',context)
     
@@ -259,9 +261,9 @@ def historico(request, id=None):
     context['item_id'] = id
     return render(request, 'lanchonete/historico.html',context)
 
-def rainhahome(request):
+def rainhaHome(request):
     context = {**global_context,  'nome_de_usuario': 'Thalles'}
-    context = setPageActive(context, 'rainhahome')
+    context = setPageActive(context, 'rainhaHome')
     context['disponivel_em_especie'] = disponivel_em_especie
     context['disponivel_em_cartao'] = disponivel_em_cartao
     context['disponivel_total'] = disponivel_total
@@ -271,7 +273,7 @@ def rainhahome(request):
     
 
     if request.method=='GET':
-        return render(request, 'lanchonete/RainhaHome.html',context)
+        return render(request, 'lanchonete/rainhaHome.html',context)
     elif request.method =='POST':
         form_data = request.POST.dict()
         disponivel_em_especie -= int(form_data['especie_retirado'])
@@ -291,25 +293,25 @@ def rainhahome(request):
         if form_data['cartao_retirado'] != '0':
             Pagamento.objects.create(user=UserTL(id=1),especie=False, valor=-1*int(form_data['cartao_retirado']))
             Evento.objects.create(info=f' Rainha retirou { form_data["cartao_retirado"] } do saldo em cartão', tipo="Retirada")
-        return render(request, 'lanchonete/rainhahome.html',context)
+        return render(request, 'lanchonete/rainhaHome.html',context)
 
-def rainhahomediscretiza(request):
+def rainhaHomeDetalhe(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context, 'RainhaHomeDetalhe')
-    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
+    context = setPageActive(context, 'rainhaHomeDetalhe')
+    return render(request, 'lanchonete/rainhaHomeDetalhe.html',context)
 
-def RainhaSaldoCons(request):
+def rainhaSaldoCons(request):
     usuarios = [*list()]
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'RainhaSaldoCons')
+    context = setPageActive(context,'rainhaSaldoCons')
     if request.method=='GET':
-        return render(request, 'lanchonete/RainhaSaldoCons.html',context)
+        return render(request, 'lanchonete/rainhaSaldoCons.html',context)
 
     elif request.method=='POST':
         form_data = request.POST.dict()
         context['listagem_usuarios'] = [*list(produto[""])]
 
-def RainhaSaldoConsDetalhe(request,id=None):
+def rainhaSaldoConsDetalhe(request,id=None):
     context['user_id']=id
     transacoes = {
         'compra': Compra.objects.filter(user=UserTL(id=id)),
@@ -319,7 +321,7 @@ def RainhaSaldoConsDetalhe(request,id=None):
     context['transacoes'] = transacoes
 
     if request.method=='GET':
-        return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
+        return render(request, 'lanchonete/rainhaSaldoConsDetalhe.html',context)
 
     elif request.method=='POST':
         form_data = request.POST.dict()
@@ -341,4 +343,4 @@ def RainhaSaldoConsDetalhe(request,id=None):
             }
             context['transacoes'] = transacoes
         
-        return render(request, 'lanchonete/RainhaSaldoConsDetalhe.html',context)
+        return render(request, 'lanchonete/rainhaSaldoConsDetalhe.html',context)
