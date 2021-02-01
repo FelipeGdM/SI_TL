@@ -21,18 +21,22 @@
             <th>Data</th>
             <th>Evento</th>
             <th>Item</th>
-            <th>Preço (TBs)</th>
+            <th>TB</th>
+            <th>Quantidade</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
-          
+          {$ for itens in transacoes $}
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td value="{{itens}}"> {{itens.data}}</td>
+            <td value="{{itens}}"> {{itens}}</td>
+            <td value="{{itens}}"> {{itens.produtos}}</td>
+            <td value="{{itens}}"> {{itens}}</td>
+            <td value="{{itens}}"> {{itens.produtos}}</td>
+            <td value="{{itens}}"> {{itens.valor}}</td>
           </tr>
-        
+          {% endfor %}
         </tbody>
       </table>
     </div>
