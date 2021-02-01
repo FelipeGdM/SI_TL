@@ -84,7 +84,7 @@ def signin(request):
     elif request.method=='POST':
     
         form_data = request.POST.dict()
-        usuario_logado = authenticate(request,username=form_data['email'], password=form_data['password'])
+        usuario_logado = authenticate(request,username=form_data['username'], password=form_data['password'])
        
         if usuario_logado is not None:
             if usuario_logado.is_active:
