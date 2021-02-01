@@ -1,5 +1,6 @@
 
 from .models import Pagamento, Compra, UserTL
+from django.contrib.auth.models import User
 
 def setPageActive(context, page_name):
   for n, page in enumerate(context['sidebar_pages']):
@@ -25,7 +26,7 @@ def calculaSaldoConsumidor(usuario_id):
   total_comprado = 0
   #Calcula o valor total associados a compras:
   for compra in compras:
-      total_comprado += compra.valor
+    total_comprado += compra.valor
 
   # Calcula o valor total de pagamentos:
   for val in pagamentos:
@@ -36,6 +37,6 @@ def calculaSaldoTotal():
   usuarios = UserTL.objects.filter(is_rainha= False ).values('id')
   saldo_total = 0 
   for usuario in usuarios:
-    saldo_total += calculaSaldoConsumidor(usuario)
+    saldo_total += calculaSaldoConsumidor(usuario['id'])
   
   return saldo_total

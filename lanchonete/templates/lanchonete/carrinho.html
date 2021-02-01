@@ -51,7 +51,7 @@
               Escolha
               <option value="">Nada</option>
               {% for prod in produtos.salgado %}
-              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB</option>
+              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB ( {{prod.estoque}} unidades Disponíveis)</option>
               {% endfor %}
             </select>
           </div>
@@ -65,7 +65,7 @@
               Escolha
               <option value="">Nada</option>
               {% for prod in produtos.bebida %}
-              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB</option>
+              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB ( {{prod.estoque}} unidades Disponíveis)</option>
               {% endfor %}
             </select>
           </div>
@@ -79,7 +79,7 @@
               Escolha
               <option value="">Nada</option>
               {% for prod in produtos.doce %}
-              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB</option>
+              <option value="{{prod}}">{{prod}} - {{prod.valor}} TB ( {{prod.estoque}} unidades Disponíveis)</option>
               {% endfor %}
             </select>
           </div>
