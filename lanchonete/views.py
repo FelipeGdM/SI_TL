@@ -14,7 +14,7 @@ sidebar_pages = [
         'name': 'Dashboard',
         'icon': 'home',
         'active': False,
-        'link': '/rainhahome'
+        'link': '/RainhaHome'
     },
     {
         'name': 'Saldo consumidores',
@@ -266,24 +266,6 @@ def historico(request, id=None):
     return render(request, 'lanchonete/historico.html',context)
 
 def rainhahome(request):
-    pagamentos_em_especie = Pagamento.objects.filter(especie=True)
-    pagamentos_em_cartao = Pagamento.objects.filter(especie=False)
-
-    eventos = Evento.objects.filter()
-
-    disponivel_em_especie = 0
-    disponivel_em_cartao = 0 
-    disponivel_total = 0
-    balanco_consumidores = calculaSaldoTotal()
-    
-    for paga in pagamentos_em_especie:
-        disponivel_em_especie += paga.valor
-
-    for paga in pagamentos_em_cartao:
-        disponivel_em_cartao += paga.valor
-
-    disponivel_total = disponivel_em_cartao + disponivel_em_especie
-
     context = {**global_context,  'nome_de_usuario': 'Thalles'}
     context = setPageActive(context, 'rainhahome')
     context['disponivel_em_especie'] = disponivel_em_especie
@@ -319,8 +301,8 @@ def rainhahome(request):
 
 def rainhahomediscretiza(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}
-    context = setPageActive(context,'RainhaHomeDiscretiza')
-    return render(request, 'lanchonete/RainhaHomeDiscretiza.html',context)
+    context = setPageActive(context, 'RainhaHomeDetalhe')
+    return render(request, 'lanchonete/RainhaHomeDetalhe.html',context)
 
 def RainhaSaldoCons(request):
     context = {**global_context, 'nome_do_usuario':'Thalles'}

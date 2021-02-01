@@ -1,112 +1,58 @@
 <!doctype html>
 <html lang="en">
-{% include 'lanchonete/head.html' %} {% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'lanchonete/carrinho.css' %}">
+{% include 'lanchonete/head.html' %}
 
 <body>
+    
+{% include 'lanchonete/header.html' %}
 
-  {% include 'lanchonete/header.html' %}
+<div class="container-fluid">
+  
+  {% include 'lanchonete/sidebar.html' %}
 
-  <div class="container-fluid">
-      
-    {% include 'lanchonete/sidebar.html' %}
-      
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">CERNALDO</h1>
-        </div>
-
-        <form method="POST">
-          {% csrf_token %}
-          <div id="transacoes_do_usuario" class="btn-group" role="group">
-            <select name="tipo_de_transação" type="button" class="btn btn-primary dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <option value="tudo">Tudo</option>
-              <option value="compras">Compras</option>
-              <option value="pagamentos">Pagamentos</option>              
-            </select>
-            <button class="btn-outline-primary" type="submit">Filtrar</button>
-          </div>
-        </form>
-
-        <div class="table-resposive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <th>Data</th>
-              <th>Evento</th>
-              <th>Item</th>
-              <th>TB</th>
-              <th>Quantidade</th>
-              <th>Total</th>
-            </thead>
-            <tbody>
-              {% for itens in trasacoes %}
-              <tr>
-                <th value="{{itens}}"> {{itens.data}}</th>
-                <th value="{{itens}}"> {{itens}}</th>
-                <th value="{{itens}}"> {{itens.produtos}}</th>
-                <th value="{{itens}}"> {{itens}}</th>
-                <th value="{{itens}}"> {{itens.produtos}}</th>
-                <th value="{{itens}}"> {{itens.valor}}</th>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <!--
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>DATA</th>
-                <th>EVENTO</th>
-                <th>ITEM</th>
-                <th>TB</th>
-                <th>QTD</th>
-                <th>SLD</th>
-                <th>delta</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="7">
-                  <table class="table mb-0">
-                    <thead>
-                      <tr>
-                        <th rowspan="2">20-10-22 10:36</th>
-                        <th colspan="4" rowspan="2">Compra</th>
-                        <th>-10</th>
-                        <th>4</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td colspan="2"></td>
-                        <td>Kitkat</td>
-                        <td>4</td>
-                        <td>1</td>
-                        <td colspan="2"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      -->
-        <input class="form-control" type="text" placeholder="Descrição eventualidade" aria-label="default input example">
-        <input class="form-control" type="text" placeholder="qtde de TB" aria-label="default input example">
-        <button type="button" class="btn btn-sm btn-outline-secondary">OK</button>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">AVISAR</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">VOLTAR</button>
-          </div>
-        </div>
-      </main>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Histórico do usuario {{user_id}}</h1>
     </div>
-  </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Evento</th>
+            <th>Item</th>
+            <th>Preço (TBs)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+
+    <label class="form-label col-3">
+      <h4>Alteração opcional:</h4>
+    </label>
+    <form id="formulario_adicionar_item" class="d-flex" method="POST">
+      {% csrf_token %}
+      <input type="name" name="nome_do_item" class="form-control" id="exampleFormControlInput1"
+        placeholder="Ex.: Bixo do ano">
+      <label class="form-label col-1">
+        <h6>TBs:</h6>
+      </label>
+      <input name="preco" type="number" value="0" min="0" max="1000" step="1" />
+      <input type="hidden" name="nome_do_formulario" value="rainha_formulario_alterar_historico" />
+      <button type="submit" class="btn btn-success col-2">Aplicar</button>
+    </form>
+
+  </main>
+</div>
 </body>
 </html>
