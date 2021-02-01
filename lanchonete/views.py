@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.db.models import F
 from .utils import setPageActive
@@ -63,13 +63,34 @@ context_user = {
 # Create your views here.
 
 def index(request):
-    return render(request, 'lanchonete/index.html')
+    if 'user_id' in request.session:
+        return redirect(homeuser)
+    else:
+        return redirect(signin)
+    # return render(request, 'lanchonete/index.html')
 
 def dashboard(request):
     return HttpResponse('Dashboard')
 
 def signin(request):
-    return render(request, 'lanchonete/signin.html') 
+    if request.method=='GET':
+        return render(request, 'lanchonete/signin.html') 
+    elif request.method=='POST':
+
+        ## lidar com form de login
+        return redirect(homeuser)
+    else:
+        return HttpResponse('Unsupported method!')
+
+def register(request):
+    if request.method=='GET':
+        return render(request, 'lanchonete/register.html') 
+    elif request.method=='POST':
+
+        ## lidar com form de cadastro
+        return redirect(homeuser)
+    else:
+        return HttpResponse('Unsupported method!')
 
 def homeuser(request):
     
